@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatSet AI Studio - Sulap Foto Seadanya Jadi Profesional</title>
+    <meta name="description" content="Aplikasi AI All-in-One: Edit foto, gabung gambar, model AI, dan desain rumah. Sekali bayar, akses selamanya tanpa langganan.">
+    
+    <!-- Fonts: Plus Jakarta Sans (Modern, Clean, Professional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. VARIABLES & RESET --- */
+        :root {
+            --primary: #0F172A; /* Hitam Kebiruan */
+            --accent: #2563EB; /* Biru SatSet */
+            --highlight: #F43F5E; /* Merah Promo */
+            --bg-body: #FFFFFF;
+            --bg-soft: #F8FAFC;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 16px;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        img { max-width: 100%; height: auto; display: block; border-radius: var(--radius); }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- 2. UTILITIES --- */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .text-center { text-align: center; }
+        .text-accent { color: var(--accent); }
+        .text-highlight { color: var(--highlight); }
+        .font-bold { font-weight: 700; }
+        .section-padding { padding: 60px 0; }
+        .bg-soft { background-color: var(--bg-soft); }
+        
+        .badge {
+            display: inline-block; padding: 6px 14px; background: #EFF6FF; 
+            color: var(--accent); border-radius: 50px; font-size: 0.85rem; 
+            font-weight: 700; margin-bottom: 20px; border: 1px solid #DBEAFE;
+        }
+
+        /* --- 3. BUTTONS --- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 1rem;
+            cursor: pointer; border: none; width: 100%; text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+        @media(min-width: 768px) { .btn { width: auto; } }
+
+        .btn-primary {
+            background-color: var(--highlight); color: white;
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-2px); background-color: #E11D48; }
+        
+        .btn-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+
+        /* --- 4. HERO SECTION --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border); padding: 15px 0;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        
+        .hero { padding-top: 140px; padding-bottom: 60px; text-align: center; }
+        .hero h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 15px; letter-spacing: -0.02em; color: var(--primary); }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .hero-mockup { 
+            margin: 40px auto 0; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); 
+            border: 4px solid white; 
+            overflow: hidden;
+            max-width: 800px;
+        }
+
+        @media(min-width: 768px) { .hero h1 { font-size: 3.5rem; } }
+
+        /* --- 5. INTERACTIVE SLIDER (Features) --- */
+        .showcase-grid { display: grid; gap: 40px; }
+        @media(min-width: 768px) { .showcase-grid { grid-template-columns: 1fr 1fr; } }
+
+        .feature-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .feature-card h3 { margin-top: 15px; margin-bottom: 5px; font-size: 1.2rem; }
+        .feature-card p { font-size: 0.95rem; color: var(--text-muted); }
+
+        .comp-container {
+            position: relative; width: 100%; padding-bottom: 100%; background: #eee; border-radius: 12px; overflow: hidden;
+        }
+        .comp-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .comp-overlay {
+            position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden; z-index: 2; border-right: 2px solid white;
+        }
+        .comp-img.before { width: 100%; max-width: unset; } 
+        
+        .comp-slider {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 44px; height: 44px; background: white; border-radius: 50%;
+            z-index: 10; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: var(--accent); cursor: ew-resize;
+        }
+        .label {
+            position: absolute; top: 15px; padding: 4px 10px; background: rgba(0,0,0,0.6);
+            color: white; font-size: 0.7rem; border-radius: 6px; font-weight: 700; z-index: 5;
+        }
+        .lb-before { left: 15px; } .lb-after { right: 15px; background: var(--accent); }
+
+        /* --- 6. FEATURE LIST --- */
+        .feature-list-grid {
+            display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 40px;
+        }
+        @media(min-width: 640px) { .feature-list-grid { grid-template-columns: 1fr 1fr; } }
+        
+        .f-item {
+            background: white; padding: 15px; border-radius: 12px; border: 1px solid var(--border);
+            display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 0.95rem;
+        }
+        .f-icon { color: var(--accent); background: #EFF6FF; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+        /* --- 7. PRICING --- */
+        .pricing-card {
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+            border: 2px solid var(--accent); border-radius: 24px;
+            padding: 40px 25px; max-width: 500px; margin: 0 auto; position: relative;
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.1);
+        }
+        .price-badge {
+            background: var(--highlight); color: white; padding: 6px 20px;
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            border-radius: 0 0 12px 12px; font-weight: 700; font-size: 0.85rem;
+        }
+        .old-price { text-decoration: line-through; color: var(--text-muted); font-size: 1.2rem; }
+        .new-price { font-size: 4rem; font-weight: 800; color: var(--primary); line-height: 1; }
+        
+        /* --- 8. BONUS & FAQ --- */
+        .bonus-section {
+            background: #FFFBEB; border: 2px dashed #F59E0B; padding: 30px;
+            border-radius: 20px; margin-top: 40px; text-align: left;
+        }
+        
+        .faq-item { border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+        .faq-btn {
+            width: 100%; text-align: left; padding: 18px 0; background: none; border: none;
+            font-weight: 600; font-size: 1.05rem; color: var(--primary);
+            display: flex; justify-content: space-between; cursor: pointer;
+        }
+        .faq-body {
+            max-height: 0; overflow: hidden; transition: 0.3s ease; color: var(--text-muted);
+        }
+        .faq-item.active .faq-body { padding-bottom: 20px; }
+        .arrow { transition: 0.3s; }
+        .faq-item.active .arrow { transform: rotate(180deg); }
+
+        /* --- 9. FOOTER & STICKY --- */
+        footer { background: var(--primary); color: white; padding: 50px 0 120px 0; text-align: center; }
+        .sticky-bar {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: white; padding: 15px 20px; border-top: 1px solid var(--border);
+            z-index: 999; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+        @media(min-width: 768px) { .sticky-bar { display: none; } }
+
+        /* --- 10. VIDEO CAROUSEL & CUSTOM MODAL (REFACTORED) --- */
+        .testi-wrapper { position: relative; margin-top: 40px; }
+        .testi-track {
+            display: flex;
+            flex-direction: column; /* Mobile Default */
+            gap: 20px;
+        }
+        .testi-nav-btn { display: none; }
+
+        /* Video Thumbnail Card */
+        .testi-item {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            flex-shrink: 0;
+            background: #000;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .testi-item img.thumb {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.9; transition: 0.3s;
+        }
+        .testi-item:hover img.thumb { opacity: 0.7; }
+        
+        /* Play Button Overlay */
+        .play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 60px; height: 60px; background: rgba(255,0,0,0.85);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); pointer-events: none; transition: 0.3s;
+        }
+        .testi-item:hover .play-btn { background: #FF0000; transform: translate(-50%, -50%) scale(1.1); }
+        .play-icon { width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 18px solid white; margin-left: 4px; }
+
+        .video-title-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white; font-weight: 600; font-size: 0.9rem; text-align: left;
+        }
+
+        /* Custom Modal CSS (Matches your reference logic) */
+        .modal-backdrop {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-backdrop.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content-box {
+            position: relative;
+            background-color: #000;
+            margin: auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        /* 16:9 Aspect Ratio for Video Container */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 2001;
+        }
+        @media(min-width: 768px) {
+            .close-modal-btn {
+                top: -40px;
+                right: -40px;
+            }
+        }
+
+        /* Desktop Carousel View */
+        @media(min-width: 768px) {
+            .testi-wrapper-window { overflow: hidden; margin: 0 50px; }
+            .testi-track {
+                flex-direction: row; gap: 20px; width: max-content;
+                transition: transform 0.5s ease-in-out; align-items: flex-start;
+            }
+            .testi-item { width: 320px; height: 180px; }
+            .testi-nav-btn {
+                display: flex; position: absolute; top: 50%; transform: translateY(-50%);
+                width: 40px; height: 40px; background: white; border: 1px solid var(--border);
+                border-radius: 50%; align-items: center; justify-content: center;
+                cursor: pointer; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                color: var(--primary); font-weight: bold; transition: 0.2s;
+            }
+            .testi-nav-btn:hover { background: var(--bg-soft); color: var(--accent); }
+            .testi-prev { left: 0; } .testi-next { right: 0; }
+            .close-modal { top: -40px; right: -40px; }
+        }
+
+        .drag-msg { display: block; text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 10px; }
+        @media(min-width: 768px) { .drag-msg { display: none; } }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <div class="logo">⚡ SatSet AI</div>
+            <a href="#pricing" class="btn btn-primary" style="width: auto; padding: 10px 20px; font-size: 0.9rem;">Ambil Promo</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero container">
+        <div class="badge">🔥 Teknologi AI V2.0 Terbaru</div>
+        <h1>Ubah Foto Seadanya Jadi <span class="text-accent">Profesional</span></h1>
+        <p>Aplikasi All-in-One untuk pebisnis & kreator. Sekali bayar, pakai sepuasnya tanpa batas. Gratis update fitur selamanya!</p>
+        
+        <div style="margin-top: 30px;">
+            <a href="#pricing" class="btn btn-primary btn-pulse" style="max-width: 350px;">Dapatkan Akses Sekarang (97rb)</a>
+        </div>
+
+        <div class="hero-mockup">
+            <img src="https://cdn.scalev.id/uploads/1763186946/P9Rb0XWu5tWseYJWu6vJKQ/1763186946249-Sulap-Foto-Pro-Mockup.webp" alt="Dashboard SatSet AI">
+        </div>
+    </header>
+
+    <!-- PAIN POINTS -->
+    <section class="section-padding bg-soft">
+        <div class="container text-center">
+            <h2 class="mb-4">Masih Pakai Cara Lama?</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                <div style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">💸</div>
+                    <h3>Mahal</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Bayar fotografer & model jutaan rupiah per sesi.</p>
+                </div>
+                <div style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🤯</div>
+                    <h3>Ribet</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Harus punya skill edit dewa atau laptop spek tinggi.</p>
+                </div>
+                <div style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">⏳</div>
+                    <h3>Lama</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Nunggu hasil edit manual berhari-hari. Momentum hilang.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FITUR UTAMA (INTERACTIVE SLIDER) -->
+    <section class="section-padding container">
+        <div class="text-center mb-4">
+            <h2 style="margin-bottom: 10px;">Fitur <span class="text-accent">Canggih</span> (Sudah Ready)</h2>
+            <p class="text-muted">Geser garis pada gambar untuk melihat keajaibannya.</p>
+        </div>
+
+        <div class="showcase-grid">
+            <!-- 1. GABUNG FOTO -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://cdn.scalev.id/uploads/1763041078/5TPn8c22UQA45Dt6FqKHnQ/1763041074794-Screenshot-2025-11-13-at-20.37.34.webp" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://cdn.scalev.id/uploads/1763041078/5TPn8c22UQA45Dt6FqKHnQ/1763041074794-Screenshot-2025-11-13-at-20.37.34.webp" class="comp-img before" style="filter: grayscale(100%);" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>1. FITUR Gabung Foto (Magic Blend)</h3>
+                <p>Upload 2-5 gambar mentah, tulis instruksi, AI akan menggabungkannya jadi poster epik.</p>
+            </div>
+
+            <!-- 2. FOTO PRODUK -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://cdn.scalev.id/uploads/1763040391/ofhAvknpF44Huuf_IoFk4g/1763040391331-Screenshot-2025-11-13-at-20.24.07.webp" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://cdn.scalev.id/uploads/1763040391/ofhAvknpF44Huuf_IoFk4g/1763040391331-Screenshot-2025-11-13-at-20.24.07.webp" class="comp-img before" style="filter: grayscale(100%);" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>2. Photoshoot Produk Sultan</h3>
+                <p>Foto produk di meja dapur bisa disulap jadi foto studio komersial mewah.</p>
+            </div>
+
+            <!-- 3. FASHION -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://cdn.scalev.id/uploads/1763051025/Astf2BS5u4uOqssAG2bWtw/1763051025624-Screenshot-2025-11-13-at-23.23.07.webp" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://cdn.scalev.id/uploads/1763051025/Astf2BS5u4uOqssAG2bWtw/1763051025624-Screenshot-2025-11-13-at-23.23.07.webp" class="comp-img before" style="filter: grayscale(100%);" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>3. Fashion Catalog</h3>
+                <p>Baju di manekin otomatis dipakai model manusia realistis (wajah/tanpa wajah).</p>
+            </div>
+
+            <!-- 4. EDIT FOTO -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://cdn.scalev.id/uploads/1763040519/H-u0BFmk78B_nnPpXtjrGg/1763040519476-Screenshot-2025-11-13-at-20.28.22.webp" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://cdn.scalev.id/uploads/1763040519/H-u0BFmk78B_nnPpXtjrGg/1763040519476-Screenshot-2025-11-13-at-20.28.22.webp" class="comp-img before" style="filter: grayscale(100%);" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>4. Edit Objek Instan</h3>
+                <p>Ganti background, tambah objek, hapus orang lewat, semua cuma pakai perintah teks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALL FEATURES LIST -->
+    <section class="section-padding bg-soft">
+        <div class="container">
+            <h2 class="text-center">Total ada <span class="text-accent">19 Fitur</span> Premium</h2>
+            <div class="feature-list-grid">
+                <!-- Group 1: Basic -->
+                <div class="f-item"><span class="f-icon">✨</span> Gabung Foto</div>
+                <div class="f-item"><span class="f-icon">📸</span> Foto Produk</div>
+                <div class="f-item"><span class="f-icon">💃</span> Foto Model AI</div>
+                <div class="f-item"><span class="f-icon">🎨</span> Edit Foto</div>
+                <div class="f-item"><span class="f-icon">📢</span> Buat Banner Iklan</div>
+                
+                <!-- Group 2: Update -->
+                <div class="f-item"><span class="f-icon">🔧</span> Perbaiki Foto (HD)</div>
+                <div class="f-item"><span class="f-icon">👗</span> Foto Fashion</div>
+                <div class="f-item"><span class="f-icon">🎠</span> Konten Carousel</div>
+                <div class="f-item"><span class="f-icon">💍</span> Pre-Wedding AI</div>
+                <div class="f-item"><span class="f-icon">📷</span> Sewa Fotografer</div>
+                <div class="f-item"><span class="f-icon">🏠</span> Desain Interior</div>
+                <div class="f-item"><span class="f-icon">✏️</span> Sketsa Jadi Nyata</div>
+                <div class="f-item"><span class="f-icon">🎭</span> Art & Karikatur</div>
+                <div class="f-item"><span class="f-icon">👳</span> Foto Umrah/Haji</div>
+                <div class="f-item"><span class="f-icon">👶</span> Baby Born Foto</div>
+                <div class="f-item"><span class="f-icon">🛂</span> Pas Foto Warna</div>
+                <div class="f-item"><span class="f-icon">🤰</span> Foto Maternity</div>
+                <div class="f-item"><span class="f-icon">🌳</span> Desain Eksterior</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP (FUTURE UPDATES) -->
+    <section class="section-padding container">
+        <div class="text-center">
+            <div class="badge" style="background: #FFF7ED; color: #EA580C; border-color: #FED7AA;">COMING SOON</div>
+            <h2>Roadmap Update (Gratis!)</h2>
+            <p>Beli sekarang, Anda akan otomatis mendapatkan fitur-fitur canggih ini saat rilis nanti:</p>
+        </div>
+        <div class="feature-list-grid" style="opacity: 0.8;">
+            <div class="f-item">🚧 Mockup Kemasan</div>
+            <div class="f-item">🚧 Miniatur 3D</div>
+            <div class="f-item">🚧 Barbershop AI</div>
+            <div class="f-item">🚧 Face Swap</div>
+            <div class="f-item">🚧 Perluas Foto (Extend)</div>
+            <div class="f-item">🚧 POV Tangan</div>
+            <div class="f-item">🚧 Hapus Background</div>
+            <div class="f-item">🚧 Addons Video</div>
+        </div>
+        <p class="text-center mt-4 text-muted"><strong>Satu-satunya tool AI sekali bayar yang terus update!</strong></p>
+    </section>
+
+    <!-- TESTIMONIALS VIDEO CAROUSEL (REVISED: DATA-SRC METHOD) -->
+    <section class="section-padding bg-soft">
+        <div class="container text-center">
+            <h2 class="mb-4">Kata Mereka <span class="text-accent">(Tanpa Diminta)</span></h2>
+            <p class="mb-4 text-muted">Sebegitu bagusnya tool ini, mereka kasih testimoni sukarela!</p>
+            
+            <div class="testi-wrapper">
+                <button class="testi-nav-btn testi-prev" onclick="moveCarousel(-1)">❮</button>
+                <div class="testi-wrapper-window">
+                    <div class="testi-track" id="testiTrack">
+                        
+                        <!-- Testimoni 1 -->
+                        <div class="testi-item" data-src="https://www.youtube.com/embed/ZW_OwC9AHIU?autoplay=1&rel=0">
+                            <img class="thumb" src="https://img.youtube.com/vi/ZW_OwC9AHIU/hqdefault.jpg" alt="Testimoni 1">
+                            <div class="play-btn"><div class="play-icon"></div></div>
+                            <div class="video-title-overlay">Review Fitur Gabung Foto</div>
+                        </div>
+
+                        <!-- Testimoni 2 -->
+                        <div class="testi-item" data-src="https://www.youtube.com/embed/wr2yVbbG_yM?autoplay=1&rel=0">
+                            <img class="thumb" src="https://img.youtube.com/vi/wr2yVbbG_yM/hqdefault.jpg" alt="Testimoni 2">
+                            <div class="play-btn"><div class="play-icon"></div></div>
+                            <div class="video-title-overlay">Review Foto Produk</div>
+                        </div>
+
+                        <!-- Testimoni 3 -->
+                        <div class="testi-item" data-src="https://www.youtube.com/embed/V8dJlvpi_Dc?autoplay=1&rel=0">
+                            <img class="thumb" src="https://img.youtube.com/vi/V8dJlvpi_Dc/hqdefault.jpg" alt="Testimoni 3">
+                            <div class="play-btn"><div class="play-icon"></div></div>
+                            <div class="video-title-overlay">Testimoni Edit Foto</div>
+                        </div>
+
+                        <!-- Testimoni 4 -->
+                        <div class="testi-item" data-src="https://www.youtube.com/embed/jJ5ShrqoJm4?autoplay=1&rel=0">
+                            <img class="thumb" src="https://img.youtube.com/vi/jJ5ShrqoJm4/hqdefault.jpg" alt="Testimoni 4">
+                            <div class="play-btn"><div class="play-icon"></div></div>
+                            <div class="video-title-overlay">Review Fitur Fashion</div>
+                        </div>
+
+                        <!-- Testimoni 5 -->
+                        <div class="testi-item" data-src="https://www.youtube.com/embed/WTVZvDJ-kuw?autoplay=1&rel=0">
+                            <img class="thumb" src="https://img.youtube.com/vi/WTVZvDJ-kuw/hqdefault.jpg" alt="Testimoni 5">
+                            <div class="play-btn"><div class="play-icon"></div></div>
+                            <div class="video-title-overlay">Testimoni Pengguna</div>
+                        </div>
+                        
+                         <!-- Testimoni 6 -->
+                        <div class="testi-item" data-src="https://www.youtube.com/embed/KYuxs0EDf8Q?autoplay=1&rel=0">
+                            <img class="thumb" src="https://img.youtube.com/vi/KYuxs0EDf8Q/hqdefault.jpg" alt="Testimoni 6">
+                            <div class="play-btn"><div class="play-icon"></div></div>
+                            <div class="video-title-overlay">Review Fitur Lainnya</div>
+                        </div>
+
+                         <!-- Testimoni 7 -->
+                        <div class="testi-item" data-src="https://www.youtube.com/embed/-dtgx5oa2fY?autoplay=1&rel=0">
+                            <img class="thumb" src="https://img.youtube.com/vi/-dtgx5oa2fY/hqdefault.jpg" alt="Testimoni 7">
+                            <div class="play-btn"><div class="play-icon"></div></div>
+                            <div class="video-title-overlay">Pengalaman Pakai SatSet</div>
+                        </div>
+
+                         <!-- Testimoni 8 -->
+                        <div class="testi-item" data-src="https://www.youtube.com/embed/D5P3kdH7nCo?autoplay=1&rel=0">
+                            <img class="thumb" src="https://img.youtube.com/vi/D5P3kdH7nCo/hqdefault.jpg" alt="Testimoni 8">
+                            <div class="play-btn"><div class="play-icon"></div></div>
+                            <div class="video-title-overlay">Bonus & Fitur Baru</div>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="testi-nav-btn testi-next" onclick="moveCarousel(1)">❯</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CUSTOM MODAL FOR YOUTUBE -->
+    <div id="customVideoModal" class="modal-backdrop">
+        <div class="modal-content-box">
+            <button class="close-modal-btn" id="closeModalBtn">×</button>
+            <div class="video-wrapper">
+                <!-- Matched attributes exactly to your working example -->
+                <iframe id="customModalIframe" src="" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING & OFFER -->
+    <section id="pricing" class="section-padding container">
+        <div class="pricing-card text-center">
+            <div class="price-badge">🔥 PROMO TERBATAS</div>
+            
+            <p style="margin-top: 20px; color: var(--text-muted);">Tools lain Rp 1.500.000 / Tahun ❌</p>
+            <p style="font-weight: 700;">Di SatSet AI Studio Cuma:</p>
+            
+            <div style="margin: 20px 0;">
+                <div class="old-price">Rp 300.000</div>
+                <div class="new-price">97rb</div>
+                <div class="text-accent font-bold">SEKALI BAYAR (LIFETIME)</div>
+            </div>
+
+            <ul style="text-align: left; margin: 30px 0; color: var(--text-main);">
+                <li style="margin-bottom: 10px;">✅ Akses Semua 19+ Fitur Premium</li>
+                <li style="margin-bottom: 10px;">✅ <strong>Gratis Update</strong> Fitur Masa Depan</li>
+                <li style="margin-bottom: 10px;">✅ Lisensi Personal (Bebas Pakai Sendiri)</li>
+                <li style="margin-bottom: 10px;">✅ Panduan Penggunaan Lengkap</li>
+                <li style="margin-bottom: 10px;">✅ Tanpa Biaya Langganan</li>
+            </ul>
+
+            <a href="https://lynk.id/satsetaisudio/ng111w41e2rl" class="btn btn-primary btn-pulse">AMBIL PROMO SEKARANG 👉</a>
+            
+            <p style="font-size: 0.8rem; margin-top: 15px; color: var(--text-muted);">Harga segitu awalnya cuma 5 fitur, sekarang 19 fitur. Untung banget!</p>
+        </div>
+
+        <!-- BONUSES -->
+        <div class="bonus-section container" style="max-width: 600px;">
+            <h3 class="text-highlight mb-2 text-center">🎁 BONUS SPESIAL (Khusus Hari Ini)</h3>
+            
+            <div style="margin-top: 20px;">
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: start;">
+                    <span style="font-size: 1.5rem;">🎧</span>
+                    <div>
+                        <strong>BONUS 1: MONEY PORTAL AUDIO</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Audio-visual experience untuk meningkatkan fokus, mindset kekayaan, dan menarik energi rezeki lebih deras.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 15px; align-items: start;">
+                    <span style="font-size: 1.5rem;">💰</span>
+                    <div>
+                        <strong>BONUS 2: AKSES OPSI PLR (Di Member Area)</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Mau cuan jutaan? Nanti di member area Anda bisa upgrade lisensi PLR. Anda bisa jual ulang aplikasi ini dengan nama brand & logo Anda sendiri (Rebranding). Keuntungan 100% masuk rekening Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-padding container" style="max-width: 700px;">
+        <h2 class="text-center mb-4">Pertanyaan Umum (FAQ)</h2>
+        
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Apakah Lifetime? <span class="arrow">▼</span></button>
+            <div class="faq-body">Ya, bayar sekali bisa Anda pakai selamanya, tanpa batasan, selama server kami aktif.</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Dikirim Lewat Mana? <span class="arrow">▼</span></button>
+            <div class="faq-body">Otomatis via Email setelah bayar. <strong>PENTING:</strong> Jangan sampai typo menulis alamat email ya!</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Bisa Dijual Kembali? <span class="arrow">▼</span></button>
+            <div class="faq-body">Tidak untuk lisensi personal 97rb ini. Kecuali Anda membeli Upgrade <strong>Lisensi PLR</strong> di member area nanti, baru boleh dijual dengan brand sendiri.</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Apakah Bisa Refund? <span class="arrow">▼</span></button>
+            <div class="faq-body">Tidak bisa. Karena ini produk digital (Direct Access) di mana Anda langsung dapat akses dan rahasianya. Membeli berarti SETUJU.</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Bisa Request Fitur? <span class="arrow">▼</span></button>
+            <div class="faq-body">Bisa banget! Ada form request fitur di dalam member area.</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h3>⚡ SatSet AI Studio</h3>
+            <p style="opacity: 0.7; margin-bottom: 20px;">Solusi Visual Cerdas untuk Kreator Indonesia.</p>
+            <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2024 SatSet AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- STICKY MOBILE CTA -->
+    <div class="sticky-bar">
+        <div style="font-weight: 800; font-size: 1.1rem; color: var(--primary);">
+            <span style="font-size: 0.8rem; color: #999; text-decoration: line-through;">300rb</span> 97rb
+        </div>
+        <a href="https://lynk.id/satsetaisudio/ng111w41e2rl" class="btn btn-primary" style="width: auto; padding: 10px 20px; font-size: 0.9rem;">Beli Sekarang</a>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 1. FAQ TOGGLE
+        const faqs = document.querySelectorAll('.faq-item');
+        faqs.forEach(faq => {
+            const btn = faq.querySelector('.faq-btn');
+            const body = faq.querySelector('.faq-body');
+            btn.addEventListener('click', () => {
+                const isActive = faq.classList.contains('active');
+                // Close all
+                faqs.forEach(other => {
+                    other.classList.remove('active');
+                    other.querySelector('.faq-body').style.maxHeight = null;
+                    other.querySelector('.arrow').style.transform = 'rotate(0deg)';
+                });
+                // Open clicked
+                if (!isActive) {
+                    faq.classList.add('active');
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                    faq.querySelector('.arrow').style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // 2. IMAGE SLIDER LOGIC
+        function initComparisons() {
+            const containers = document.querySelectorAll('.comp-container');
+            function updateImageWidths() {
+                containers.forEach(container => {
+                    const beforeImg = container.querySelector('.comp-img.before');
+                    const w = container.offsetWidth;
+                    beforeImg.style.width = w + "px";
+                });
+            }
+            containers.forEach(container => {
+                const overlay = container.querySelector('.comp-overlay');
+                const slider = container.querySelector('.comp-slider');
+                let clicked = 0;
+                let w = container.offsetWidth;
+                overlay.style.width = (w / 2) + "px";
+                slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+                slider.addEventListener("mousedown", slideReady);
+                slider.addEventListener("touchstart", slideReady);
+                window.addEventListener("mouseup", slideFinish);
+                window.addEventListener("touchend", slideFinish);
+                function slideReady(e) {
+                    e.preventDefault(); clicked = 1;
+                    window.addEventListener("mousemove", slideMove);
+                    window.addEventListener("touchmove", slideMove);
+                }
+                function slideFinish() { 
+                    clicked = 0; 
+                    window.removeEventListener("mousemove", slideMove);
+                    window.removeEventListener("touchmove", slideMove);
+                }
+                function slideMove(e) {
+                    if (clicked == 0) return false;
+                    w = container.offsetWidth; 
+                    let pos = getCursorPos(e);
+                    if (pos < 0) pos = 0;
+                    if (pos > w) pos = w;
+                    slide(pos);
+                }
+                function getCursorPos(e) {
+                    let a = container.getBoundingClientRect();
+                    let x = 0;
+                    e = (e.changedTouches) ? e.changedTouches[0] : e;
+                    x = e.pageX - a.left - window.pageXOffset;
+                    return x;
+                }
+                function slide(x) {
+                    overlay.style.width = x + "px";
+                    slider.style.left = container.offsetWidth - (container.offsetWidth - x) - (slider.offsetWidth/2) + "px";
+                }
+            });
+            updateImageWidths();
+            window.addEventListener('resize', updateImageWidths);
+        }
+        
+        // 3. TESTIMONIAL CAROUSEL LOGIC
+        let currentTestiIndex = 0;
+        function moveCarousel(direction) {
+            const track = document.getElementById('testiTrack');
+            const items = document.querySelectorAll('.testi-item');
+            const totalItems = items.length;
+            const visibleItems = 3; 
+            const gap = 20; 
+            
+            if (totalItems === 0) return; 
+
+            const stepWidth = items[0].offsetWidth + gap;
+            const maxIndex = totalItems - visibleItems;
+
+            currentTestiIndex += direction;
+
+            if (currentTestiIndex < 0) currentTestiIndex = 0;
+            if (maxIndex > 0 && currentTestiIndex > maxIndex) currentTestiIndex = maxIndex;
+            else if (maxIndex <= 0) currentTestiIndex = 0;
+
+            const translateX = -(currentTestiIndex * stepWidth);
+            track.style.transform = `translateX(${translateX}px)`;
+        }
+
+        // 4. VIDEO MODAL LOGIC (REVISED MATCHING YOUR WORKING EXAMPLE)
+        // Get Modal Elements
+        const modal = document.getElementById('customVideoModal');
+        const iframe = document.getElementById('customModalIframe');
+        const closeBtn = document.getElementById('closeModalBtn');
+
+        // Attach Click Event to all Testimonial Items
+        document.querySelectorAll('.testi-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Get data-src from clicked item
+                const videoSrc = this.getAttribute('data-src');
+                if (videoSrc) {
+                    // Set iframe src to trigger autoplay
+                    iframe.src = videoSrc;
+                    // Show modal
+                    modal.classList.add('show');
+                }
+            });
+        });
+
+        // Close Modal Function
+        function closeModal() {
+            modal.classList.remove('show');
+            // Important: Clear src to stop video playback
+            iframe.src = ""; 
+        }
+
+        // Close when clicking X button
+        closeBtn.addEventListener('click', closeModal);
+
+        // Close when clicking outside the modal content
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+
+        window.addEventListener('load', () => {
+            initComparisons();
+        });
+    </script>
+</body>
+</html>
