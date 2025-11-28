@@ -261,27 +261,47 @@
             .testi-prev { left: 0; } .testi-next { right: 0; }
         }
 
-        /* MODAL STYLES */
+        /* MODAL STYLES (FIXED FOR MOBILE) */
         .custom-modal {
             display: none; position: fixed; z-index: 2000; left: 0; top: 0;
             width: 100%; height: 100%; overflow: auto;
-            background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;
+            background-color: rgba(0,0,0,0.9); 
+            /* Flex centering ensure modal stays in center */
+            display: none; align-items: center; justify-content: center;
             opacity: 0; transition: opacity 0.3s ease;
         }
         .custom-modal.show { display: flex; opacity: 1; }
+        
         .modal-dialog {
             position: relative; width: 90%; max-width: 800px; margin: auto;
             background-color: #000; border-radius: 8px; overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
+        
         .modal-body { position: relative; padding: 0; padding-bottom: 56.25%; height: 0; }
         .modal-body iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        
+        /* Close Button - Desktop */
         .close-btn {
             position: absolute; top: -40px; right: 0; color: white;
             font-size: 30px; font-weight: bold; background: none; border: none;
-            cursor: pointer; z-index: 2001;
+            cursor: pointer; z-index: 2001; 
+            /* Add size for touch */
+            width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
         }
-        @media(min-width: 768px) { .close-btn { right: -40px; } }
+
+        /* New Close Button - Mobile Text */
+        .close-text-btn {
+            display: block; width: 100%; padding: 15px; 
+            background: #1e1e1e; color: white; text-align: center; 
+            font-weight: bold; cursor: pointer; border: none;
+            border-top: 1px solid #333;
+        }
+
+        @media(min-width: 768px) { 
+            .close-btn { right: -40px; } 
+            .close-text-btn { display: none; } /* Hide on desktop */
+        }
 
         .drag-msg { display: block; text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 10px; }
         @media(min-width: 768px) { .drag-msg { display: none; } }
@@ -632,13 +652,15 @@
         </div>
     </section>
     
-    <!-- MODAL (FIXED LOGIC) -->
+    <!-- MODAL (FIXED LOGIC WITH MOBILE CLOSE BUTTON) -->
     <div id="myModal" class="custom-modal">
         <div class="modal-dialog">
             <button type="button" class="close-btn" id="closeModalBtn">&times;</button>
             <div class="modal-body">
                 <iframe id="video" src="" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
             </div>
+            <!-- Mobile specific close text button below video -->
+            <button type="button" class="close-text-btn" onclick="document.getElementById('closeModalBtn').click()">Tutup Video [x]</button>
         </div>
     </div>
 
@@ -824,10 +846,6 @@
                 track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
             } else {
                 // Desktop: Transform logic
-                // Note: This simple logic requires tracking index per carousel.
-                // For simplicity in this monolithic file without complex state management:
-                // We will fallback to scrollLeft for desktop too if specific index tracking is complex.
-                // But let's implement a simple scrollLeft based approach which is robust.
                 const scrollAmount = 340; // Card width + gap
                 track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
             }
