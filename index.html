@@ -23,7 +23,6 @@
             --text-muted: #64748B;
             --border: #E2E8F0;
             --radius: 16px;
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -180,7 +179,7 @@
         }
         @media(min-width: 768px) { .sticky-bar { display: none; } }
 
-        /* --- 10. VIDEO CAROUSEL & CUSTOM MODAL (REFACTORED) --- */
+        /* --- 10. VIDEO CAROUSEL & CUSTOM MODAL (ADAPTED FROM YOUR SAMPLE) --- */
         .testi-wrapper { position: relative; margin-top: 40px; }
         .testi-track {
             display: flex;
@@ -189,8 +188,9 @@
         }
         .testi-nav-btn { display: none; }
 
-        /* Video Thumbnail Card */
-        .testi-item {
+        /* Video Thumbnail Card (Trigger) */
+        .video-btn {
+            display: block;
             width: 100%;
             border-radius: 12px;
             border: 1px solid var(--border);
@@ -201,21 +201,22 @@
             position: relative;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-        .testi-item img.thumb {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 0.9; transition: 0.3s;
+        .video-btn:hover { transform: scale(1.02); }
+        
+        .video-btn img {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.9;
         }
-        .testi-item:hover img.thumb { opacity: 0.7; }
         
         /* Play Button Overlay */
-        .play-btn {
+        .play-overlay {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 60px; height: 60px; background: rgba(255,0,0,0.85);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); pointer-events: none; transition: 0.3s;
+            color: white; pointer-events: none; transition: 0.3s;
         }
-        .testi-item:hover .play-btn { background: #FF0000; transform: translate(-50%, -50%) scale(1.1); }
+        .video-btn:hover .play-overlay { background: #FF0000; transform: translate(-50%, -50%) scale(1.1); }
         .play-icon { width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 18px solid white; margin-left: 4px; }
 
         .video-title-overlay {
@@ -224,78 +225,52 @@
             color: white; font-weight: 600; font-size: 0.9rem; text-align: left;
         }
 
-        /* Custom Modal CSS (Matches your reference logic) */
-        .modal-backdrop {
+        /* MODAL STYLES (Custom Implementation of Bootstrap Modal Logic) */
+        .custom-modal {
             display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.9);
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            background-color: rgba(0,0,0,0.8); /* Backdrop */
+            align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
         }
-        .modal-backdrop.show {
-            display: flex;
-            opacity: 1;
+        .custom-modal.show { display: flex; opacity: 1; }
+        
+        .modal-dialog {
+            position: relative; width: 90%; max-width: 800px;
+            margin: auto; background-color: #000;
+            border-radius: 8px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
-        .modal-content-box {
-            position: relative;
-            background-color: #000;
-            margin: auto;
-            padding: 0;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 800px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            overflow: hidden;
+        
+        .modal-body {
+            position: relative; padding: 0; 
+            /* 16:9 Aspect Ratio Hack */
+            padding-bottom: 56.25%; height: 0;
         }
-        /* 16:9 Aspect Ratio for Video Container */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
+        
+        .modal-body iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
         }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        .close-modal-btn {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 2001;
+        
+        .close-btn {
+            position: absolute; top: -40px; right: 0;
+            color: white; font-size: 30px; font-weight: bold;
+            background: none; border: none; cursor: pointer; z-index: 2001;
         }
         @media(min-width: 768px) {
-            .close-modal-btn {
-                top: -40px;
-                right: -40px;
-            }
+            .close-btn { right: -40px; }
         }
 
-        /* Desktop Carousel View */
+        /* Desktop Carousel */
         @media(min-width: 768px) {
             .testi-wrapper-window { overflow: hidden; margin: 0 50px; }
             .testi-track {
                 flex-direction: row; gap: 20px; width: max-content;
                 transition: transform 0.5s ease-in-out; align-items: flex-start;
             }
-            .testi-item { width: 320px; height: 180px; }
+            .video-btn { width: 320px; height: 180px; } /* Fixed Size Desktop */
             .testi-nav-btn {
                 display: flex; position: absolute; top: 50%; transform: translateY(-50%);
                 width: 40px; height: 40px; background: white; border: 1px solid var(--border);
@@ -305,7 +280,6 @@
             }
             .testi-nav-btn:hover { background: var(--bg-soft); color: var(--accent); }
             .testi-prev { left: 0; } .testi-next { right: 0; }
-            .close-modal { top: -40px; right: -40px; }
         }
 
         .drag-msg { display: block; text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 10px; }
@@ -482,7 +456,7 @@
         <p class="text-center mt-4 text-muted"><strong>Satu-satunya tool AI sekali bayar yang terus update!</strong></p>
     </section>
 
-    <!-- TESTIMONIALS VIDEO CAROUSEL (REVISED: DATA-SRC METHOD) -->
+    <!-- TESTIMONIALS VIDEO CAROUSEL (FIXED WITH SUCCESSFUL MODAL LOGIC) -->
     <section class="section-padding bg-soft">
         <div class="container text-center">
             <h2 class="mb-4">Kata Mereka <span class="text-accent">(Tanpa Diminta)</span></h2>
@@ -493,59 +467,52 @@
                 <div class="testi-wrapper-window">
                     <div class="testi-track" id="testiTrack">
                         
-                        <!-- Testimoni 1 -->
-                        <div class="testi-item" data-src="https://www.youtube.com/embed/ZW_OwC9AHIU?autoplay=1&rel=0">
-                            <img class="thumb" src="https://img.youtube.com/vi/ZW_OwC9AHIU/hqdefault.jpg" alt="Testimoni 1">
-                            <div class="play-btn"><div class="play-icon"></div></div>
+                        <!-- Video Thumbnails Triggering Modal -->
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/ZW_OwC9AHIU?autoplay=1">
+                            <img src="https://img.youtube.com/vi/ZW_OwC9AHIU/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Review Fitur Gabung Foto</div>
                         </div>
 
-                        <!-- Testimoni 2 -->
-                        <div class="testi-item" data-src="https://www.youtube.com/embed/wr2yVbbG_yM?autoplay=1&rel=0">
-                            <img class="thumb" src="https://img.youtube.com/vi/wr2yVbbG_yM/hqdefault.jpg" alt="Testimoni 2">
-                            <div class="play-btn"><div class="play-icon"></div></div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/wr2yVbbG_yM?autoplay=1">
+                            <img src="https://img.youtube.com/vi/wr2yVbbG_yM/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Review Foto Produk</div>
                         </div>
 
-                        <!-- Testimoni 3 -->
-                        <div class="testi-item" data-src="https://www.youtube.com/embed/V8dJlvpi_Dc?autoplay=1&rel=0">
-                            <img class="thumb" src="https://img.youtube.com/vi/V8dJlvpi_Dc/hqdefault.jpg" alt="Testimoni 3">
-                            <div class="play-btn"><div class="play-icon"></div></div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/V8dJlvpi_Dc?autoplay=1">
+                            <img src="https://img.youtube.com/vi/V8dJlvpi_Dc/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Testimoni Edit Foto</div>
                         </div>
 
-                        <!-- Testimoni 4 -->
-                        <div class="testi-item" data-src="https://www.youtube.com/embed/jJ5ShrqoJm4?autoplay=1&rel=0">
-                            <img class="thumb" src="https://img.youtube.com/vi/jJ5ShrqoJm4/hqdefault.jpg" alt="Testimoni 4">
-                            <div class="play-btn"><div class="play-icon"></div></div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/jJ5ShrqoJm4?autoplay=1">
+                            <img src="https://img.youtube.com/vi/jJ5ShrqoJm4/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Review Fitur Fashion</div>
                         </div>
 
-                        <!-- Testimoni 5 -->
-                        <div class="testi-item" data-src="https://www.youtube.com/embed/WTVZvDJ-kuw?autoplay=1&rel=0">
-                            <img class="thumb" src="https://img.youtube.com/vi/WTVZvDJ-kuw/hqdefault.jpg" alt="Testimoni 5">
-                            <div class="play-btn"><div class="play-icon"></div></div>
+                         <div class="video-btn" data-src="https://www.youtube.com/embed/WTVZvDJ-kuw?autoplay=1">
+                            <img src="https://img.youtube.com/vi/WTVZvDJ-kuw/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Testimoni Pengguna</div>
                         </div>
-                        
-                         <!-- Testimoni 6 -->
-                        <div class="testi-item" data-src="https://www.youtube.com/embed/KYuxs0EDf8Q?autoplay=1&rel=0">
-                            <img class="thumb" src="https://img.youtube.com/vi/KYuxs0EDf8Q/hqdefault.jpg" alt="Testimoni 6">
-                            <div class="play-btn"><div class="play-icon"></div></div>
+
+                         <div class="video-btn" data-src="https://www.youtube.com/embed/KYuxs0EDf8Q?autoplay=1">
+                            <img src="https://img.youtube.com/vi/KYuxs0EDf8Q/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Review Fitur Lainnya</div>
                         </div>
 
-                         <!-- Testimoni 7 -->
-                        <div class="testi-item" data-src="https://www.youtube.com/embed/-dtgx5oa2fY?autoplay=1&rel=0">
-                            <img class="thumb" src="https://img.youtube.com/vi/-dtgx5oa2fY/hqdefault.jpg" alt="Testimoni 7">
-                            <div class="play-btn"><div class="play-icon"></div></div>
+                         <div class="video-btn" data-src="https://www.youtube.com/embed/-dtgx5oa2fY?autoplay=1">
+                            <img src="https://img.youtube.com/vi/-dtgx5oa2fY/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Pengalaman Pakai SatSet</div>
                         </div>
 
-                         <!-- Testimoni 8 -->
-                        <div class="testi-item" data-src="https://www.youtube.com/embed/D5P3kdH7nCo?autoplay=1&rel=0">
-                            <img class="thumb" src="https://img.youtube.com/vi/D5P3kdH7nCo/hqdefault.jpg" alt="Testimoni 8">
-                            <div class="play-btn"><div class="play-icon"></div></div>
+                         <div class="video-btn" data-src="https://www.youtube.com/embed/D5P3kdH7nCo?autoplay=1">
+                            <img src="https://img.youtube.com/vi/D5P3kdH7nCo/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Bonus & Fitur Baru</div>
                         </div>
 
@@ -556,13 +523,13 @@
         </div>
     </section>
     
-    <!-- CUSTOM MODAL FOR YOUTUBE -->
-    <div id="customVideoModal" class="modal-backdrop">
-        <div class="modal-content-box">
-            <button class="close-modal-btn" id="closeModalBtn">×</button>
-            <div class="video-wrapper">
-                <!-- Matched attributes exactly to your working example -->
-                <iframe id="customModalIframe" src="" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+    <!-- MODAL (Based on your working reference) -->
+    <div id="myModal" class="custom-modal">
+        <div class="modal-dialog">
+            <button type="button" class="close-btn" id="closeModalBtn">&times;</button>
+            <div class="modal-body">
+                <!-- Attributes matched exactly to your sample -->
+                <iframe id="video" src="" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -744,7 +711,7 @@
         let currentTestiIndex = 0;
         function moveCarousel(direction) {
             const track = document.getElementById('testiTrack');
-            const items = document.querySelectorAll('.testi-item');
+            const items = document.querySelectorAll('.video-btn');
             const totalItems = items.length;
             const visibleItems = 3; 
             const gap = 20; 
@@ -764,48 +731,39 @@
             track.style.transform = `translateX(${translateX}px)`;
         }
 
-        // 4. VIDEO MODAL LOGIC (REVISED MATCHING YOUR WORKING EXAMPLE)
-        // Get Modal Elements
-        const modal = document.getElementById('customVideoModal');
-        const iframe = document.getElementById('customModalIframe');
-        const closeBtn = document.getElementById('closeModalBtn');
+        // 4. MODAL LOGIC (ADAPTED FROM YOUR REFERENCE)
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById('myModal');
+            const iframe = document.getElementById('video');
+            const closeBtn = document.getElementById('closeModalBtn');
+            
+            // Attach click event to all video triggers
+            const triggers = document.querySelectorAll('.video-btn');
+            triggers.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const videoSrc = this.getAttribute('data-src');
+                    if (videoSrc) {
+                        iframe.src = videoSrc;
+                        modal.classList.add('show');
+                    }
+                });
+            });
 
-        // Attach Click Event to all Testimonial Items
-        document.querySelectorAll('.testi-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // Get data-src from clicked item
-                const videoSrc = this.getAttribute('data-src');
-                if (videoSrc) {
-                    // Set iframe src to trigger autoplay
-                    iframe.src = videoSrc;
-                    // Show modal
-                    modal.classList.add('show');
+            // Close Modal Function
+            function closeModal() {
+                modal.classList.remove('show');
+                iframe.src = ""; // Stop video
+            }
+
+            // Close triggers
+            closeBtn.addEventListener('click', closeModal);
+            
+            // Click outside modal to close
+            window.addEventListener('click', function(e) {
+                if (e.target == modal) {
+                    closeModal();
                 }
             });
-        });
-
-        // Close Modal Function
-        function closeModal() {
-            modal.classList.remove('show');
-            // Important: Clear src to stop video playback
-            iframe.src = ""; 
-        }
-
-        // Close when clicking X button
-        closeBtn.addEventListener('click', closeModal);
-
-        // Close when clicking outside the modal content
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Close on Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
         });
 
         window.addEventListener('load', () => {
