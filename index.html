@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SatSet AI Studio - Sulap Foto Seadanya Jadi Profesional</title>
-    <meta name="description" content="Aplikasi AI All-in-One: Edit foto, gabung gambar, model AI, dan desain rumah. Sekali bayar, akses selamanya tanpa langganan.">
-    
+    <meta name="description"
+        content="Aplikasi AI All-in-One: Edit foto, gabung gambar, model AI, dan desain rumah. Sekali bayar, akses selamanya tanpa langganan.">
+
     <!-- FIX YOUTUBE ERROR 153 -->
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         /* --- 1. VARIABLES & RESET --- */
         :root {
-            --primary: #0F172A; 
-            --accent: #2563EB; 
-            --highlight: #F43F5E; 
+            --primary: #0F172A;
+            --accent: #2563EB;
+            --highlight: #F43F5E;
             --bg-body: #FFFFFF;
             --bg-soft: #F8FAFC;
             --text-main: #1E293B;
@@ -28,193 +31,523 @@
             --radius: 16px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; }
-        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
-        img { max-width: 100%; height: auto; display: block; border-radius: var(--radius); }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
 
         /* --- 2. UTILITIES --- */
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        .text-center { text-align: center; }
-        .text-accent { color: var(--accent); }
-        .text-highlight { color: var(--highlight); }
-        .font-bold { font-weight: 700; }
-        .section-padding { padding: 60px 0; }
-        .bg-soft { background-color: var(--bg-soft); }
-        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .text-highlight {
+            color: var(--highlight);
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        .bg-soft {
+            background-color: var(--bg-soft);
+        }
+
         .badge {
-            display: inline-block; padding: 6px 14px; background: #EFF6FF; 
-            color: var(--accent); border-radius: 50px; font-size: 0.85rem; 
-            font-weight: 700; margin-bottom: 20px; border: 1px solid #DBEAFE;
+            display: inline-block;
+            padding: 6px 14px;
+            background: #EFF6FF;
+            color: var(--accent);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border: 1px solid #DBEAFE;
         }
 
         /* --- 3. BUTTONS --- */
         .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 1rem;
-            cursor: pointer; border: none; width: 100%; text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
             text-decoration: none;
         }
-        @media(min-width: 768px) { .btn { width: auto; } }
+
+        @media(min-width: 768px) {
+            .btn {
+                width: auto;
+            }
+        }
 
         .btn-primary {
-            background-color: var(--highlight); color: white;
+            background-color: var(--highlight);
+            color: white;
             box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
         }
-        .btn-primary:hover { transform: translateY(-2px); background-color: #E11D48; }
-        
-        .btn-pulse { animation: pulse 2s infinite; }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background-color: #E11D48;
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(244, 63, 94, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+            }
         }
 
         /* --- 4. HERO SECTION --- */
         .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border); padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
         }
-        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-        
-        .hero { padding-top: 140px; padding-bottom: 60px; text-align: center; }
-        .hero h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 15px; letter-spacing: -0.02em; color: var(--primary); }
-        .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        
-        .hero-mockup { 
-            margin: 40px auto 0; 
-            border-radius: 20px; 
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); 
-            border: 4px solid white; 
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-mockup {
+            margin: 40px auto 0;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            border: 4px solid white;
             overflow: hidden;
             max-width: 800px;
         }
 
-        @media(min-width: 768px) { .hero h1 { font-size: 3.5rem; } }
+        @media(min-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
 
         /* --- 5. INTERACTIVE SLIDER --- */
-        .showcase-grid { display: grid; gap: 40px; }
-        @media(min-width: 768px) { .showcase-grid { grid-template-columns: 1fr 1fr; } }
+        .showcase-grid {
+            display: grid;
+            gap: 40px;
+        }
 
-        .feature-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
-        .feature-card h3 { margin-top: 15px; margin-bottom: 5px; font-size: 1.2rem; }
-        .feature-card p { font-size: 0.95rem; color: var(--text-muted); }
+        @media(min-width: 768px) {
+            .showcase-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+        }
+
+        .feature-card h3 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
 
         .comp-container {
-            position: relative; width: 100%; padding-bottom: 100%; background: #eee; border-radius: 12px; overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            background: #eee;
+            border-radius: 12px;
+            overflow: hidden;
         }
-        .comp-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+
+        .comp-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
         .comp-overlay {
-            position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden; z-index: 2; border-right: 2px solid white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+            border-right: 2px solid white;
         }
-        .comp-img.before { width: 100%; max-width: unset; } 
-        
+
+        .comp-img.before {
+            width: 100%;
+            max-width: unset;
+        }
+
         .comp-slider {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 44px; height: 44px; background: white; border-radius: 50%;
-            z-index: 10; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: var(--accent); cursor: ew-resize;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px;
+            height: 44px;
+            background: white;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: var(--accent);
+            cursor: ew-resize;
         }
+
         .label {
-            position: absolute; top: 15px; padding: 4px 10px; background: rgba(0,0,0,0.6);
-            color: white; font-size: 0.7rem; border-radius: 6px; font-weight: 700; z-index: 5;
+            position: absolute;
+            top: 15px;
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 0.7rem;
+            border-radius: 6px;
+            font-weight: 700;
+            z-index: 5;
         }
-        .lb-before { left: 15px; } .lb-after { right: 15px; background: var(--accent); }
+
+        .lb-before {
+            left: 15px;
+        }
+
+        .lb-after {
+            right: 15px;
+            background: var(--accent);
+        }
 
         /* --- 6. FEATURE LIST --- */
         .feature-list-grid {
-            display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 40px;
         }
-        @media(min-width: 640px) { .feature-list-grid { grid-template-columns: 1fr 1fr; } }
-        
+
+        @media(min-width: 640px) {
+            .feature-list-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
         .f-item {
-            background: white; padding: 15px; border-radius: 12px; border: 1px solid var(--border);
-            display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 0.95rem;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
-        .f-icon { color: var(--accent); background: #EFF6FF; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+        .f-icon {
+            color: var(--accent);
+            background: #EFF6FF;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
         /* --- 7. PRICING --- */
         .pricing-card {
             background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
-            border: 2px solid var(--accent); border-radius: 24px;
-            padding: 40px 25px; max-width: 500px; margin: 0 auto; position: relative;
+            border: 2px solid var(--accent);
+            border-radius: 24px;
+            padding: 40px 25px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
             box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.1);
         }
+
         .price-badge {
-            background: var(--highlight); color: white; padding: 6px 20px;
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            border-radius: 0 0 12px 12px; font-weight: 700; font-size: 0.85rem;
+            background: var(--highlight);
+            color: white;
+            padding: 6px 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 12px 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
         }
-        .old-price { text-decoration: line-through; color: var(--text-muted); font-size: 1.2rem; }
-        .new-price { font-size: 4rem; font-weight: 800; color: var(--primary); line-height: 1; }
-        
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .new-price {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
         /* --- 8. BONUS & FAQ --- */
         .bonus-section {
-            background: #FFFBEB; border: 2px dashed #F59E0B; padding: 30px;
-            border-radius: 20px; margin-top: 40px; text-align: left;
+            background: #FFFBEB;
+            border: 2px dashed #F59E0B;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 40px;
+            text-align: left;
         }
-        
-        .faq-item { border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
         .faq-btn {
-            width: 100%; text-align: left; padding: 18px 0; background: none; border: none;
-            font-weight: 600; font-size: 1.05rem; color: var(--primary);
-            display: flex; justify-content: space-between; cursor: pointer;
+            width: 100%;
+            text-align: left;
+            padding: 18px 0;
+            background: none;
+            border: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
         }
+
         .faq-body {
-            max-height: 0; overflow: hidden; transition: 0.3s ease; color: var(--text-muted);
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s ease;
+            color: var(--text-muted);
         }
-        .faq-item.active .faq-body { padding-bottom: 20px; }
-        .arrow { transition: 0.3s; }
-        .faq-item.active .arrow { transform: rotate(180deg); }
+
+        .faq-item.active .faq-body {
+            padding-bottom: 20px;
+        }
+
+        .arrow {
+            transition: 0.3s;
+        }
+
+        .faq-item.active .arrow {
+            transform: rotate(180deg);
+        }
 
         /* --- 9. FOOTER & STICKY --- */
-        footer { background: var(--primary); color: white; padding: 50px 0 120px 0; text-align: center; }
-        .sticky-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; padding: 15px 20px; border-top: 1px solid var(--border);
-            z-index: 999; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 50px 0 120px 0;
+            text-align: center;
         }
-        @media(min-width: 768px) { .sticky-bar { display: none; } }
+
+        .sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 15px 20px;
+            border-top: 1px solid var(--border);
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        @media(min-width: 768px) {
+            .sticky-bar {
+                display: none;
+            }
+        }
 
         /* --- 10. CAROUSEL SYSTEM (VIDEO & SCREENSHOT) --- */
-        .testi-section { margin-bottom: 60px; }
-        .testi-wrapper { position: relative; overflow: hidden; }
-        
+        .testi-section {
+            margin-bottom: 60px;
+        }
+
+        .testi-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
         /* Horizontal Scroll Container */
         .testi-track {
             display: flex;
             gap: 20px;
-            overflow-x: auto; 
+            overflow-x: auto;
             scroll-snap-type: x mandatory;
             padding-bottom: 20px;
             -webkit-overflow-scrolling: touch;
         }
-        
+
         /* Hide Scrollbar */
-        .testi-track::-webkit-scrollbar { display: none; }
-        .testi-track { -ms-overflow-style: none; scrollbar-width: none; }
+        .testi-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testi-track {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
         /* Video Card */
         .video-btn {
-            min-width: 280px; width: 280px;
+            min-width: 280px;
+            width: 280px;
             scroll-snap-align: center;
-            border-radius: 12px; border: 1px solid var(--border);
-            overflow: hidden; aspect-ratio: 16/9; flex-shrink: 0; background: #000;
-            position: relative; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            flex-shrink: 0;
+            background: #000;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
         }
-        .video-btn:hover { transform: scale(1.02); }
-        .video-btn img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
-        
+
+        .video-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .video-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
         /* Screenshot Card */
         .screenshot-item {
-            min-width: 260px; width: 260px;
+            min-width: 260px;
+            width: 260px;
             scroll-snap-align: center;
             background: white;
             border-radius: 16px;
@@ -223,93 +556,232 @@
             flex-shrink: 0;
             box-shadow: var(--shadow);
         }
+
         .screenshot-item img {
-            width: 100%; height: auto; display: block;
+            width: 100%;
+            height: auto;
+            display: block;
         }
-        
+
         .play-overlay {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 60px; height: 60px; background: rgba(255,0,0,0.85);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; pointer-events: none; transition: 0.3s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 0, 0, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            pointer-events: none;
+            transition: 0.3s;
         }
-        .video-btn:hover .play-overlay { background: #FF0000; transform: translate(-50%, -50%) scale(1.1); }
-        .play-icon { width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 18px solid white; margin-left: 4px; }
+
+        .video-btn:hover .play-overlay {
+            background: #FF0000;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 18px solid white;
+            margin-left: 4px;
+        }
 
         .video-title-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white; font-weight: 600; font-size: 0.9rem; text-align: left;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: left;
         }
 
         /* Desktop Specifics */
-        .testi-nav-btn { display: none; }
+        .testi-nav-btn {
+            display: none;
+        }
+
         @media(min-width: 768px) {
-            .testi-wrapper { overflow: hidden; } /* Hide scrollbar area */
-            .testi-track { overflow-x: hidden; }
-            .video-btn { min-width: 320px; width: 320px; }
-            .screenshot-item { min-width: 300px; width: 300px; }
-            
-            .testi-nav-btn {
-                display: flex; position: absolute; top: 50%; transform: translateY(-50%);
-                width: 40px; height: 40px; background: white; border: 1px solid var(--border);
-                border-radius: 50%; align-items: center; justify-content: center;
-                cursor: pointer; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                color: var(--primary); font-weight: bold; transition: 0.2s;
+            .testi-wrapper {
+                overflow: hidden;
             }
-            .testi-nav-btn:hover { background: var(--bg-soft); color: var(--accent); }
-            .testi-prev { left: 0; } .testi-next { right: 0; }
+
+            /* Hide scrollbar area */
+            .testi-track {
+                overflow-x: hidden;
+            }
+
+            .video-btn {
+                min-width: 320px;
+                width: 320px;
+            }
+
+            .screenshot-item {
+                min-width: 300px;
+                width: 300px;
+            }
+
+            .testi-nav-btn {
+                display: flex;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 40px;
+                background: white;
+                border: 1px solid var(--border);
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 10;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                color: var(--primary);
+                font-weight: bold;
+                transition: 0.2s;
+            }
+
+            .testi-nav-btn:hover {
+                background: var(--bg-soft);
+                color: var(--accent);
+            }
+
+            .testi-prev {
+                left: 0;
+            }
+
+            .testi-next {
+                right: 0;
+            }
         }
 
         /* MODAL STYLES (FIXED FOR MOBILE) */
         .custom-modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
-            width: 100%; height: 100%; overflow: auto;
-            background-color: rgba(0,0,0,0.9); 
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
             /* Flex centering ensure modal stays in center */
-            display: none; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s ease;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        .custom-modal.show { display: flex; opacity: 1; }
-        
+
+        .custom-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
         .modal-dialog {
-            position: relative; width: 90%; max-width: 800px; margin: auto;
-            background-color: #000; border-radius: 8px; overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
-        
-        .modal-body { position: relative; padding: 0; padding-bottom: 56.25%; height: 0; }
-        .modal-body iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        
+
+        .modal-body {
+            position: relative;
+            padding: 0;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .modal-body iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         /* Close Button - Desktop */
         .close-btn {
-            position: absolute; top: -40px; right: 0; color: white;
-            font-size: 30px; font-weight: bold; background: none; border: none;
-            cursor: pointer; z-index: 2001; 
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 2001;
             /* Add size for touch */
-            width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* New Close Button - Mobile Text */
         .close-text-btn {
-            display: block; width: 100%; padding: 15px; 
-            background: #1e1e1e; color: white; text-align: center; 
-            font-weight: bold; cursor: pointer; border: none;
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #1e1e1e;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
             border-top: 1px solid #333;
         }
 
-        @media(min-width: 768px) { 
-            .close-btn { right: -40px; } 
-            .close-text-btn { display: none; } /* Hide on desktop */
+        @media(min-width: 768px) {
+            .close-btn {
+                right: -40px;
+            }
+
+            .close-text-btn {
+                display: none;
+            }
+
+            /* Hide on desktop */
         }
 
-        .drag-msg { display: block; text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 10px; }
-        @media(min-width: 768px) { .drag-msg { display: none; } }
+        .drag-msg {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+        @media(min-width: 768px) {
+            .drag-msg {
+                display: none;
+            }
+        }
 
         /* --- 11. AUDIO FLOATING BUTTON --- */
         .music-btn {
             position: fixed;
-            bottom: 90px; /* Above sticky CTA on mobile */
+            bottom: 90px;
+            /* Above sticky CTA on mobile */
             right: 20px;
             width: 50px;
             height: 50px;
@@ -319,44 +791,69 @@
             align-items: center;
             justify-content: center;
             color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             z-index: 998;
             transition: all 0.3s ease;
             border: 2px solid white;
         }
-        .music-btn:hover { transform: scale(1.1); background: var(--accent-hover); }
-        .music-btn.playing { animation: spin 4s linear infinite; background: var(--highlight); }
-        .music-icon { font-size: 24px; }
 
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        @media(min-width: 768px) { .music-btn { bottom: 30px; } } /* Lower on desktop */
+        .music-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent-hover);
+        }
 
+        .music-btn.playing {
+            animation: spin 4s linear infinite;
+            background: var(--highlight);
+        }
+
+        .music-icon {
+            font-size: 24px;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .music-btn {
+                bottom: 30px;
+            }
+        }
+
+        /* Lower on desktop */
     </style>
 </head>
+
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container nav-inner">
             <div class="logo">⚡ SatSet AI Studio</div>
-            <a href="#pricing" class="btn btn-primary" style="width: auto; padding: 10px 20px; font-size: 0.9rem;">Ambil Promo Sekarang</a>
+            <a href="#pricing" class="btn btn-primary" style="width: auto; padding: 10px 20px; font-size: 0.9rem;">Ambil
+                Promo Sekarang</a>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
     <header class="hero container">
         <div class="badge">🔥 Teknologi AI V1.1 Terbaru</div>
-        <h1>Ubah Foto Seadanya Jadi <span class="text-accent">Profesional</span></h1>
+
+        <h1>Buat & Edit Konten Foto <span class="text-accent">Profesional</span> Cuma 1 Klik! </h1>
         <p>Aplikasi All-in-One untuk pebisnis & kreator. Sekali bayar, pakai sepuasnya. Gratis update fitur</p>
-        
+
         <div style="margin-top: 30px;">
             <a href="#pricing" class="btn btn-primary btn-pulse" style="max-width: 350px;">Dapatkan Akses Sekarang </a>
         </div>
 
         <div class="hero-mockup">
             <!-- UPDATED HERO IMAGE -->
-            <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/produk_ailab.png" alt="Dashboard SatSet AI">
+            <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/produk_ailab.png"
+                alt="Dashboard SatSet AI">
         </div>
     </header>
 
@@ -365,20 +862,26 @@
         <div class="container text-center">
             <h2 class="mb-4">Masih Pakai Cara Lama?</h2>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-                <div style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                <div
+                    style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
                     <div style="font-size: 2.5rem; margin-bottom: 10px;">💸</div>
                     <h3>Mahal</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Bayar fotografer & model jutaan rupiah per sesi.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Bayar fotografer & model jutaan rupiah per
+                        sesi.</p>
                 </div>
-                <div style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                <div
+                    style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
                     <div style="font-size: 2.5rem; margin-bottom: 10px;">🤯</div>
                     <h3>Ribet</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Harus punya skill edit dewa atau laptop spek tinggi.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Harus punya skill edit dewa atau laptop spek
+                        tinggi.</p>
                 </div>
-                <div style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                <div
+                    style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
                     <div style="font-size: 2.5rem; margin-bottom: 10px;">⏳</div>
                     <h3>Lama</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Nunggu hasil edit manual berhari-hari. Momentum hilang.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Nunggu hasil edit manual berhari-hari.
+                        Momentum hilang.</p>
                 </div>
             </div>
         </div>
@@ -395,12 +898,15 @@
             <!-- 1. GABUNG FOTO -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/1_Fitur%20Gabungkan%20Gambar%20(after).jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/1_Fitur%20Gabungkan%20Gambar%20(after).jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/1_Fitur%20Gabungkan%20Gambar%20(before).jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/1_Fitur%20Gabungkan%20Gambar%20(before).jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>1. <span style="color: red;">FITUR</span> GABUNG FOTO (MAGIC BLEND)</h3>
@@ -410,12 +916,15 @@
             <!-- 2. FOTO PRODUK -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/3_Foto_produk(after).jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/3_Foto_produk(after).jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/3_Foto_produk(before).jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/3_Foto_produk(before).jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>2. <span style="color: red;">FITUR</span> PHOTOSHOOT PRODUK</h3>
@@ -425,12 +934,15 @@
             <!-- 3. FASHION -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/4_Fitur_foto_Fashion(After)_2.jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/4_Fitur_foto_Fashion(After)_2.jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7.jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7.jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>3. <span style="color: red;">FITUR</span> PHOTOSHOOT FASHION</h3>
@@ -440,27 +952,33 @@
             <!-- 4. EDIT FOTO -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/2_Fitur_edit_Foto(After).jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/2_Fitur_edit_Foto(After).jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/2_Fitur_edit_Foto(Before).jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/2_Fitur_edit_Foto(Before).jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>4. <span style="color: red;">FITUR</span> EDIT PHOTO INSTAN</h3>
                 <p>Ganti background, tambah objek, hapus orang lewat, semua cuma pakai perintah teks.</p>
             </div>
-            
+
             <!-- 5. BANNER IKLAN (NEW) -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/5_Fitur_Buat_Banner(after).jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/5_Fitur_Buat_Banner(after).jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/5_Fitur_Buat_Banner(before).jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/5_Fitur_Buat_Banner(before).jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>5. <span style="color: red;">FITUR</span> BUAT BANNER IKLAN</h3>
@@ -470,12 +988,15 @@
             <!-- 6. PREWEDDING AI (NEW) -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7_Fitur_Buat_Prewedding(after).jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7_Fitur_Buat_Prewedding(after).jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7_Fitur_Buat_Prewedding(before).jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7_Fitur_Buat_Prewedding(before).jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>6. <span style="color: red;">FITUR</span> FOTO PRE+WEDDING AI</h3>
@@ -485,12 +1006,15 @@
             <!-- 7. FOTOGRAFER (NEW) -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_Fotographerl(after)_1.jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_Fotographerl(after)_1.jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_Fotographerl(before)_1.jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_Fotographerl(before)_1.jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>7. <span style="color: red;">FITUR</span> SEWA FOTOGRAFER PROFESSIONAL</h3>
@@ -500,12 +1024,15 @@
             <!-- 8. SKETSA GAMBAR (NEW) -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_SketsaGambar(after).jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_SketsaGambar(after).jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_SketsaGambar(before).jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_SketsaGambar(before).jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>8. <span style="color: red;">FITUR</span> SKETSA JADI NYATA</h3>
@@ -515,12 +1042,15 @@
             <!-- 9. ART & KARIKATUR (NEW) -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/10_Fitur_ArtKarikatur(after).jpg" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/10_Fitur_ArtKarikatur(after).jpg"
+                        class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/10_Fitur_ArtKarikatur(before).jpg" class="comp-img before" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/10_Fitur_ArtKarikatur(before).jpg"
+                            class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
-                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
                 </div>
                 <span class="drag-msg">👆 Geser Gambar</span>
                 <h3>9. <span style="color: red;">FITUR</span> ART & KARIKATUR </h3>
@@ -541,7 +1071,7 @@
                 <div class="f-item"><span class="f-icon">💃</span> Foto Model AI</div>
                 <div class="f-item"><span class="f-icon">🎨</span> Edit Foto</div>
                 <div class="f-item"><span class="f-icon">📢</span> Buat Banner Iklan</div>
-                
+
                 <!-- Group 2: Update -->
                 <div class="f-item"><span class="f-icon">🔧</span> Perbaiki Foto (HD)</div>
                 <div class="f-item"><span class="f-icon">👗</span> Foto Fashion</div>
@@ -585,51 +1115,67 @@
         <div class="container text-center">
             <div class="badge">REVIEW VIDEO</div>
             <h2 class="mb-4">Apa Kata Mereka? <span class="text-accent">(Video)</span></h2>
-            
+
             <div class="testi-wrapper">
                 <button class="testi-nav-btn testi-prev" onclick="moveCarousel('videoTrack', -1)">❮</button>
                 <div class="testi-wrapper-window">
                     <div class="testi-track" id="videoTrack">
-                        
+
                         <!-- Video Items -->
                         <div class="video-btn" data-src="https://www.youtube.com/embed/ZW_OwC9AHIU?autoplay=1">
                             <img src="https://img.youtube.com/vi/ZW_OwC9AHIU/hqdefault.jpg" alt="Thumbnail">
-                            <div class="play-overlay"><div class="play-icon"></div></div>
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
                             <div class="video-title-overlay">Review Fitur Gabung Foto</div>
                         </div>
                         <div class="video-btn" data-src="https://www.youtube.com/embed/wr2yVbbG_yM?autoplay=1">
                             <img src="https://img.youtube.com/vi/wr2yVbbG_yM/hqdefault.jpg" alt="Thumbnail">
-                            <div class="play-overlay"><div class="play-icon"></div></div>
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
                             <div class="video-title-overlay">Review Foto Produk</div>
                         </div>
                         <div class="video-btn" data-src="https://www.youtube.com/embed/V8dJlvpi_Dc?autoplay=1">
                             <img src="https://img.youtube.com/vi/V8dJlvpi_Dc/hqdefault.jpg" alt="Thumbnail">
-                            <div class="play-overlay"><div class="play-icon"></div></div>
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
                             <div class="video-title-overlay">Testimoni Edit Foto</div>
                         </div>
                         <div class="video-btn" data-src="https://www.youtube.com/embed/jJ5ShrqoJm4?autoplay=1">
                             <img src="https://img.youtube.com/vi/jJ5ShrqoJm4/hqdefault.jpg" alt="Thumbnail">
-                            <div class="play-overlay"><div class="play-icon"></div></div>
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
                             <div class="video-title-overlay">Review Fitur Fashion</div>
                         </div>
-                         <div class="video-btn" data-src="https://www.youtube.com/embed/WTVZvDJ-kuw?autoplay=1">
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/WTVZvDJ-kuw?autoplay=1">
                             <img src="https://img.youtube.com/vi/WTVZvDJ-kuw/hqdefault.jpg" alt="Thumbnail">
-                            <div class="play-overlay"><div class="play-icon"></div></div>
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
                             <div class="video-title-overlay">Testimoni Pengguna</div>
                         </div>
-                         <div class="video-btn" data-src="https://www.youtube.com/embed/KYuxs0EDf8Q?autoplay=1">
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/KYuxs0EDf8Q?autoplay=1">
                             <img src="https://img.youtube.com/vi/KYuxs0EDf8Q/hqdefault.jpg" alt="Thumbnail">
-                            <div class="play-overlay"><div class="play-icon"></div></div>
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
                             <div class="video-title-overlay">Review Fitur Lainnya</div>
                         </div>
-                         <div class="video-btn" data-src="https://www.youtube.com/embed/-dtgx5oa2fY?autoplay=1">
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/-dtgx5oa2fY?autoplay=1">
                             <img src="https://img.youtube.com/vi/-dtgx5oa2fY/hqdefault.jpg" alt="Thumbnail">
-                            <div class="play-overlay"><div class="play-icon"></div></div>
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
                             <div class="video-title-overlay">Pengalaman Pakai SatSet</div>
                         </div>
-                         <div class="video-btn" data-src="https://www.youtube.com/embed/D5P3kdH7nCo?autoplay=1">
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/D5P3kdH7nCo?autoplay=1">
                             <img src="https://img.youtube.com/vi/D5P3kdH7nCo/hqdefault.jpg" alt="Thumbnail">
-                            <div class="play-overlay"><div class="play-icon"></div></div>
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
                             <div class="video-title-overlay">Bonus & Fitur Baru</div>
                         </div>
 
@@ -645,30 +1191,36 @@
         <div class="container text-center">
             <div class="badge">BUKTI CHAT</div>
             <h2 class="mb-4">Apa Kata Mereka di <span class="text-highlight">Social Media?</span></h2>
-            
+
             <div class="testi-wrapper">
                 <button class="testi-nav-btn testi-prev" onclick="moveCarousel('socialTrack', -1)">❮</button>
                 <div class="testi-wrapper-window">
                     <div class="testi-track" id="socialTrack">
-                        
+
                         <!-- Screenshot Items (Vertical Cards) -->
                         <div class="screenshot-item">
-                            <img src="https://cdn.scalev.id/uploads/1762405769/njfl09e-uroBtkBGTHuRHg/1762405769134-Screenshot-2025-11-06-120639.webp" alt="Chat 1">
+                            <img src="https://cdn.scalev.id/uploads/1762405769/njfl09e-uroBtkBGTHuRHg/1762405769134-Screenshot-2025-11-06-120639.webp"
+                                alt="Chat 1">
                         </div>
                         <div class="screenshot-item">
-                            <img src="https://cdn.scalev.id/uploads/1762095488/LsgEj428RWhpD6ywL0a0Sw/1762095487673-Screenshot-2025-11-02-215757.webp" alt="Chat 2">
+                            <img src="https://cdn.scalev.id/uploads/1762095488/LsgEj428RWhpD6ywL0a0Sw/1762095487673-Screenshot-2025-11-02-215757.webp"
+                                alt="Chat 2">
                         </div>
                         <div class="screenshot-item">
-                            <img src="https://cdn.scalev.id/uploads/1762405402/POxvvd4cC0EuFMAo_RJrvw/1762405402745-Screenshot-2025-11-06-120037.webp" alt="Chat 3">
+                            <img src="https://cdn.scalev.id/uploads/1762405402/POxvvd4cC0EuFMAo_RJrvw/1762405402745-Screenshot-2025-11-06-120037.webp"
+                                alt="Chat 3">
                         </div>
                         <div class="screenshot-item">
-                            <img src="https://cdn.scalev.id/uploads/1758884008976-Testimoni%20Sulap%20Foto%20PLR.webp" alt="Chat 4">
+                            <img src="https://cdn.scalev.id/uploads/1758884008976-Testimoni%20Sulap%20Foto%20PLR.webp"
+                                alt="Chat 4">
                         </div>
-                         <div class="screenshot-item">
-                            <img src="https://cdn.scalev.id/business_files/27bPk9lYNYrkj6RwK5bsdwl9/1760799604837-Screenshot%202025-10-18%20at%2021.58.46.webp" alt="Chat 5">
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/business_files/27bPk9lYNYrkj6RwK5bsdwl9/1760799604837-Screenshot%202025-10-18%20at%2021.58.46.webp"
+                                alt="Chat 5">
                         </div>
-                         <div class="screenshot-item">
-                            <img src="https://cdn.scalev.id/business_files/98lfBFMXvhNXsOoM1crXONJy/1760232282648-IMG_9748.jpeg" alt="Chat 6">
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/business_files/98lfBFMXvhNXsOoM1crXONJy/1760232282648-IMG_9748.jpeg"
+                                alt="Chat 6">
                         </div>
 
                     </div>
@@ -677,7 +1229,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- MODAL (FIXED LOGIC WITH MOBILE CLOSE BUTTON) -->
     <div id="myModal" class="custom-modal">
         <div class="modal-dialog">
@@ -686,7 +1238,8 @@
                 <iframe id="video" src="" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
             </div>
             <!-- Mobile specific close text button below video -->
-            <button type="button" class="close-text-btn" onclick="document.getElementById('closeModalBtn').click()">Tutup Video [x]</button>
+            <button type="button" class="close-text-btn"
+                onclick="document.getElementById('closeModalBtn').click()">Tutup Video [x]</button>
         </div>
     </div>
 
@@ -694,10 +1247,10 @@
     <section id="pricing" class="section-padding container">
         <div class="pricing-card text-center">
             <div class="price-badge">🔥 PROMO TERBATAS</div>
-            
+
             <p style="margin-top: 20px; color: var(--text-muted);">Tools lain Rp 1.500.000 / Tahun ❌</p>
             <p style="font-weight: 700;">Di SatSet AI Studio Cuma:</p>
-            
+
             <div style="margin: 20px 0;">
                 <div class="old-price">Rp 300.000</div>
                 <div class="new-price">100K</div>
@@ -712,24 +1265,27 @@
                 <li style="margin-bottom: 10px;">✅ Tanpa Biaya Langganan</li>
             </ul>
 
-            <a href="https://lynk.id/satsetaisudio/ng111w41e2rl" class="btn btn-primary btn-pulse">AMBIL PROMO SEKARANG 👉</a>
-            
-            <p style="font-size: 0.8rem; margin-top: 15px; color: var(--text-muted);">Harga segitu awalnya cuma 5 fitur, sekarang 19 fitur. Untung banget!</p>
+            <a href="https://lynk.id/satsetaisudio/ng111w41e2rl" class="btn btn-primary btn-pulse">AMBIL PROMO SEKARANG
+                👉</a>
+
+            <p style="font-size: 0.8rem; margin-top: 15px; color: var(--text-muted);">Harga segitu awalnya cuma 5 fitur,
+                sekarang 19 fitur. Untung banget!</p>
         </div>
 
         <!-- BONUSES -->
         <div class="bonus-section container" style="max-width: 600px;">
             <h3 class="text-highlight mb-2 text-center">🎁 BONUS SPESIAL (Khusus Hari Ini)</h3>
-            
+
             <div style="margin-top: 20px;">
                 <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: start;">
                     <span style="font-size: 1.5rem;">🎧</span>
                     <div>
                         <strong>BONUS 1: MONEY PORTAL AUDIO</strong>
-                        <p style="font-size: 0.9rem; color: #666;">Audio-visual experience untuk meningkatkan fokus, mindset kekayaan, dan menarik energi rezeki lebih deras.</p>
+                        <p style="font-size: 0.9rem; color: #666;">Audio-visual experience untuk meningkatkan fokus,
+                            mindset kekayaan, dan menarik energi rezeki lebih deras.</p>
                     </div>
                 </div>
-                
+
                 <!-- <div style="display: flex; gap: 15px; align-items: start;">
                     <span style="font-size: 1.5rem;">💰</span>
                     <div>
@@ -744,14 +1300,16 @@
     <!-- FAQ -->
     <section class="section-padding container" style="max-width: 700px;">
         <h2 class="text-center mb-4">Pertanyaan Umum (FAQ)</h2>
-        
+
         <div class="faq-item">
             <button class="faq-btn">🤔 Apakah Lifetime? <span class="arrow">▼</span></button>
-            <div class="faq-body">Ya, bayar sekali bisa Anda pakai selamanya, tanpa batasan, selama server kami aktif.</div>
+            <div class="faq-body">Ya, bayar sekali bisa Anda pakai selamanya, tanpa batasan, selama server kami aktif.
+            </div>
         </div>
         <div class="faq-item">
             <button class="faq-btn">🤔 Dikirim Lewat Mana? <span class="arrow">▼</span></button>
-            <div class="faq-body">Otomatis via Email setelah bayar. <strong>PENTING:</strong> Jangan sampai typo menulis alamat email ya!</div>
+            <div class="faq-body">Otomatis via Email setelah bayar. <strong>PENTING:</strong> Jangan sampai typo menulis
+                alamat email ya!</div>
         </div>
         <div class="faq-item">
             <button class="faq-btn">🤔 Bisa Dijual Kembali? <span class="arrow">▼</span></button>
@@ -759,7 +1317,8 @@
         </div>
         <div class="faq-item">
             <button class="faq-btn">🤔 Apakah Bisa Refund? <span class="arrow">▼</span></button>
-            <div class="faq-body">Tidak bisa. Karena ini produk digital (Direct Access) di mana Anda langsung dapat akses dan rahasianya. Membeli berarti SETUJU.</div>
+            <div class="faq-body">Tidak bisa. Karena ini produk digital (Direct Access) di mana Anda langsung dapat
+                akses dan rahasianya. Membeli berarti SETUJU.</div>
         </div>
         <!-- <div class="faq-item">
             <button class="faq-btn">🤔 Bisa Request Fitur? <span class="arrow">▼</span></button>
@@ -781,7 +1340,8 @@
         <div style="font-weight: 800; font-size: 1.1rem; color: var(--primary);">
             <span style="font-size: 0.8rem; color: #999; text-decoration: line-through;">300rb</span> 100K
         </div>
-        <a href="https://lynk.id/satsetaisudio/ng111w41e2rl" class="btn btn-primary" style="width: auto; padding: 10px 20px; font-size: 0.9rem;">Beli Sekarang</a>
+        <a href="https://lynk.id/satsetaisudio/ng111w41e2rl" class="btn btn-primary"
+            style="width: auto; padding: 10px 20px; font-size: 0.9rem;">Beli Sekarang</a>
     </div>
 
     <!-- AUDIO TOGGLE BUTTON -->
@@ -791,14 +1351,15 @@
 
     <!-- AUDIO ELEMENT -->
     <audio id="bgAudio" loop>
-        <source src="https://github.com/satyaaditech/aistudiolab_filesupport/raw/refs/heads/main/ost_sat_set_AI.mp3" type="audio/mpeg">
+        <source src="https://github.com/satyaaditech/aistudiolab_filesupport/raw/refs/heads/main/ost_sat_set_AI.mp3"
+            type="audio/mpeg">
         Browser Anda tidak mendukung audio.
     </audio>
 
     <!-- SCRIPTS -->
     <script>
         // 1. AUDIO LOGIC
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const audio = document.getElementById('bgAudio');
             const btn = document.getElementById('musicToggle');
             let isPlaying = false;
@@ -826,7 +1387,7 @@
                     // If blocked, wait for manual toggle
                 });
             }
-            
+
             // Listener for manual toggle
             btn.addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent triggering global click
@@ -883,14 +1444,14 @@
                     window.addEventListener("mousemove", slideMove);
                     window.addEventListener("touchmove", slideMove);
                 }
-                function slideFinish() { 
-                    clicked = 0; 
+                function slideFinish() {
+                    clicked = 0;
                     window.removeEventListener("mousemove", slideMove);
                     window.removeEventListener("touchmove", slideMove);
                 }
                 function slideMove(e) {
                     if (clicked == 0) return false;
-                    w = container.offsetWidth; 
+                    w = container.offsetWidth;
                     let pos = getCursorPos(e);
                     if (pos < 0) pos = 0;
                     if (pos > w) pos = w;
@@ -905,18 +1466,18 @@
                 }
                 function slide(x) {
                     overlay.style.width = x + "px";
-                    slider.style.left = container.offsetWidth - (container.offsetWidth - x) - (slider.offsetWidth/2) + "px";
+                    slider.style.left = container.offsetWidth - (container.offsetWidth - x) - (slider.offsetWidth / 2) + "px";
                 }
             });
             updateImageWidths();
             window.addEventListener('resize', updateImageWidths);
         }
-        
+
         // 4. UNIVERSAL CAROUSEL LOGIC (Multi Instance)
         function moveCarousel(trackId, direction) {
             const track = document.getElementById(trackId);
             const isDesktop = window.innerWidth >= 768;
-            
+
             if (!isDesktop) {
                 // Mobile: Native smooth scroll
                 const scrollAmount = 280; // Approx card width
@@ -971,4 +1532,1540 @@
         });
     </script>
 </body>
+
+</html><!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatSet AI Studio - Sulap Foto Seadanya Jadi Profesional</title>
+    <meta name="description"
+        content="Aplikasi AI All-in-One: Edit foto, gabung gambar, model AI, dan desain rumah. Sekali bayar, akses selamanya tanpa langganan.">
+
+    <!-- FIX YOUTUBE ERROR 153 -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- 1. VARIABLES & RESET --- */
+        :root {
+            --primary: #0F172A;
+            --accent: #2563EB;
+            --highlight: #F43F5E;
+            --bg-body: #FFFFFF;
+            --bg-soft: #F8FAFC;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- 2. UTILITIES --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .text-highlight {
+            color: var(--highlight);
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        .bg-soft {
+            background-color: var(--bg-soft);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #EFF6FF;
+            color: var(--accent);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border: 1px solid #DBEAFE;
+        }
+
+        /* --- 3. BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+
+        @media(min-width: 768px) {
+            .btn {
+                width: auto;
+            }
+        }
+
+        .btn-primary {
+            background-color: var(--highlight);
+            color: white;
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background-color: #E11D48;
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(244, 63, 94, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+            }
+        }
+
+        /* --- 4. HERO SECTION --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-mockup {
+            margin: 40px auto 0;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            border: 4px solid white;
+            overflow: hidden;
+            max-width: 800px;
+        }
+
+        @media(min-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* --- 5. INTERACTIVE SLIDER --- */
+        .showcase-grid {
+            display: grid;
+            gap: 40px;
+        }
+
+        @media(min-width: 768px) {
+            .showcase-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+        }
+
+        .feature-card h3 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .comp-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            background: #eee;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .comp-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .comp-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+            border-right: 2px solid white;
+        }
+
+        .comp-img.before {
+            width: 100%;
+            max-width: unset;
+        }
+
+        .comp-slider {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px;
+            height: 44px;
+            background: white;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: var(--accent);
+            cursor: ew-resize;
+        }
+
+        .label {
+            position: absolute;
+            top: 15px;
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 0.7rem;
+            border-radius: 6px;
+            font-weight: 700;
+            z-index: 5;
+        }
+
+        .lb-before {
+            left: 15px;
+        }
+
+        .lb-after {
+            right: 15px;
+            background: var(--accent);
+        }
+
+        /* --- 6. FEATURE LIST --- */
+        .feature-list-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        @media(min-width: 640px) {
+            .feature-list-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .f-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .f-icon {
+            color: var(--accent);
+            background: #EFF6FF;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* --- 7. PRICING --- */
+        .pricing-card {
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+            border: 2px solid var(--accent);
+            border-radius: 24px;
+            padding: 40px 25px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.1);
+        }
+
+        .price-badge {
+            background: var(--highlight);
+            color: white;
+            padding: 6px 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 12px 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .new-price {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        /* --- 8. BONUS & FAQ --- */
+        .bonus-section {
+            background: #FFFBEB;
+            border: 2px dashed #F59E0B;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        .faq-btn {
+            width: 100%;
+            text-align: left;
+            padding: 18px 0;
+            background: none;
+            border: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .faq-item.active .faq-body {
+            padding-bottom: 20px;
+        }
+
+        .arrow {
+            transition: 0.3s;
+        }
+
+        .faq-item.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* --- 9. FOOTER & STICKY --- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 50px 0 120px 0;
+            text-align: center;
+        }
+
+        .sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 15px 20px;
+            border-top: 1px solid var(--border);
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        @media(min-width: 768px) {
+            .sticky-bar {
+                display: none;
+            }
+        }
+
+        /* --- 10. CAROUSEL SYSTEM (VIDEO & SCREENSHOT) --- */
+        .testi-section {
+            margin-bottom: 60px;
+        }
+
+        .testi-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Horizontal Scroll Container */
+        .testi-track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Hide Scrollbar */
+        .testi-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testi-track {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Video Card */
+        .video-btn {
+            min-width: 280px;
+            width: 280px;
+            scroll-snap-align: center;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            flex-shrink: 0;
+            background: #000;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .video-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .video-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        /* Screenshot Card */
+        .screenshot-item {
+            min-width: 260px;
+            width: 260px;
+            scroll-snap-align: center;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: var(--shadow);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 0, 0, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .video-btn:hover .play-overlay {
+            background: #FF0000;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 18px solid white;
+            margin-left: 4px;
+        }
+
+        .video-title-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        /* Desktop Specifics */
+        .testi-nav-btn {
+            display: none;
+        }
+
+        @media(min-width: 768px) {
+            .testi-wrapper {
+                overflow: hidden;
+            }
+
+            /* Hide scrollbar area */
+            .testi-track {
+                overflow-x: hidden;
+            }
+
+            .video-btn {
+                min-width: 320px;
+                width: 320px;
+            }
+
+            .screenshot-item {
+                min-width: 300px;
+                width: 300px;
+            }
+
+            .testi-nav-btn {
+                display: flex;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 40px;
+                background: white;
+                border: 1px solid var(--border);
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 10;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                color: var(--primary);
+                font-weight: bold;
+                transition: 0.2s;
+            }
+
+            .testi-nav-btn:hover {
+                background: var(--bg-soft);
+                color: var(--accent);
+            }
+
+            .testi-prev {
+                left: 0;
+            }
+
+            .testi-next {
+                right: 0;
+            }
+        }
+
+        /* MODAL STYLES (FIXED FOR MOBILE) */
+        .custom-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Flex centering ensure modal stays in center */
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .custom-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-dialog {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 0;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .modal-body iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Close Button - Desktop */
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 2001;
+            /* Add size for touch */
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* New Close Button - Mobile Text */
+        .close-text-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #1e1e1e;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-top: 1px solid #333;
+        }
+
+        @media(min-width: 768px) {
+            .close-btn {
+                right: -40px;
+            }
+
+            .close-text-btn {
+                display: none;
+            }
+
+            /* Hide on desktop */
+        }
+
+        .drag-msg {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+        @media(min-width: 768px) {
+            .drag-msg {
+                display: none;
+            }
+        }
+
+        /* --- 11. AUDIO FLOATING BUTTON --- */
+        .music-btn {
+            position: fixed;
+            bottom: 90px;
+            /* Above sticky CTA on mobile */
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 998;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent-hover);
+        }
+
+        .music-btn.playing {
+            animation: spin 4s linear infinite;
+            background: var(--highlight);
+        }
+
+        .music-icon {
+            font-size: 24px;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .music-btn {
+                bottom: 30px;
+            }
+        }
+
+        /* Lower on desktop */
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <div class="logo">⚡ SatSet AI Studio</div>
+            <a href="#pricing" class="btn btn-primary" style="width: auto; padding: 10px 20px; font-size: 0.9rem;">Ambil
+                Promo Sekarang</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero container">
+        <div class="badge">🔥 Teknologi AI V1.1 Terbaru</div>
+
+        <h1>Buat & Edit Konten Foto <span class="text-accent">Profesional</span> Cuma 1 Klik! </h1>
+        <p>Aplikasi All-in-One untuk pebisnis & kreator. Sekali bayar, pakai sepuasnya. Gratis update fitur</p>
+
+        <div style="margin-top: 30px;">
+            <a href="#pricing" class="btn btn-primary btn-pulse" style="max-width: 350px;">Dapatkan Akses Sekarang </a>
+        </div>
+
+        <div class="hero-mockup">
+            <!-- UPDATED HERO IMAGE -->
+            <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/produk_ailab.png"
+                alt="Dashboard SatSet AI">
+        </div>
+    </header>
+
+    <!-- PAIN POINTS -->
+    <section class="section-padding bg-soft">
+        <div class="container text-center">
+            <h2 class="mb-4">Masih Pakai Cara Lama?</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                <div
+                    style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">💸</div>
+                    <h3>Mahal</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Bayar fotografer & model jutaan rupiah per
+                        sesi.</p>
+                </div>
+                <div
+                    style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🤯</div>
+                    <h3>Ribet</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Harus punya skill edit dewa atau laptop spek
+                        tinggi.</p>
+                </div>
+                <div
+                    style="background: white; padding: 25px; border-radius: 16px; width: 100%; max-width: 300px; border: 1px solid var(--border);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">⏳</div>
+                    <h3>Lama</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Nunggu hasil edit manual berhari-hari.
+                        Momentum hilang.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FITUR UTAMA (INTERACTIVE SLIDER) -->
+    <section class="section-padding container">
+        <div class="text-center mb-4">
+            <h2 style="margin-bottom: 10px;">Contoh Fitur <span class="text-accent">Canggih</span> Siap Digunakan</h2>
+            <p class="text-muted">Geser garis pada gambar untuk melihat keajaibannya.</p>
+        </div>
+
+        <div class="showcase-grid">
+            <!-- 1. GABUNG FOTO -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/1_Fitur%20Gabungkan%20Gambar%20(after).jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/1_Fitur%20Gabungkan%20Gambar%20(before).jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>1. <span style="color: red;">FITUR</span> GABUNG FOTO (MAGIC BLEND)</h3>
+                <p>Upload 2-5 gambar mentah, tulis instruksi, AI akan menggabungkannya jadi poster epik.</p>
+            </div>
+
+            <!-- 2. FOTO PRODUK -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/3_Foto_produk(after).jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/3_Foto_produk(before).jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>2. <span style="color: red;">FITUR</span> PHOTOSHOOT PRODUK</h3>
+                <p>Foto produk di meja dapur bisa disulap jadi foto studio komersial mewah.</p>
+            </div>
+
+            <!-- 3. FASHION -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/4_Fitur_foto_Fashion(After)_2.jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7.jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>3. <span style="color: red;">FITUR</span> PHOTOSHOOT FASHION</h3>
+                <p>Baju di manekin otomatis dipakai model manusia realistis (wajah/tanpa wajah).</p>
+            </div>
+
+            <!-- 4. EDIT FOTO -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/2_Fitur_edit_Foto(After).jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/2_Fitur_edit_Foto(Before).jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>4. <span style="color: red;">FITUR</span> EDIT PHOTO INSTAN</h3>
+                <p>Ganti background, tambah objek, hapus orang lewat, semua cuma pakai perintah teks.</p>
+            </div>
+
+            <!-- 5. BANNER IKLAN (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/5_Fitur_Buat_Banner(after).jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/5_Fitur_Buat_Banner(before).jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>5. <span style="color: red;">FITUR</span> BUAT BANNER IKLAN</h3>
+                <p>Ubah foto produk biasa menjadi materi iklan profesional dalam hitungan detik.</p>
+            </div>
+
+            <!-- 6. PREWEDDING AI (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7_Fitur_Buat_Prewedding(after).jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7_Fitur_Buat_Prewedding(before).jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>6. <span style="color: red;">FITUR</span> FOTO PRE+WEDDING AI</h3>
+                <p>Wujudkan foto impian dengan pasangan tanpa perlu sewa studio atau lokasi mahal.</p>
+            </div>
+
+            <!-- 7. FOTOGRAFER (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_Fotographerl(after)_1.jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_Fotographerl(before)_1.jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>7. <span style="color: red;">FITUR</span> SEWA FOTOGRAFER PROFESSIONAL</h3>
+                <p>Simulasi foto studio untuk kebutuhan personal, keluarga, hingga foto profil profesional.</p>
+            </div>
+
+            <!-- 8. SKETSA GAMBAR (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_SketsaGambar(after).jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_SketsaGambar(before).jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>8. <span style="color: red;">FITUR</span> SKETSA JADI NYATA</h3>
+                <p>Ubah coretan tangan kasar menjadi gambar rendering 3D yang realistis dan menakjubkan.</p>
+            </div>
+
+            <!-- 9. ART & KARIKATUR (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/10_Fitur_ArtKarikatur(after).jpg"
+                        class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/10_Fitur_ArtKarikatur(before).jpg"
+                            class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div>
+                    <div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>9. <span style="color: red;">FITUR</span> ART & KARIKATUR </h3>
+                <p>Kreasikan foto wajah menjadi karikatur lucu atau gaya seni artistik lainnya.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ALL FEATURES LIST -->
+    <section class="section-padding bg-soft">
+        <div class="container">
+            <h2 class="text-center">Total ada <span class="text-accent">19 Fitur</span> Premium</h2>
+            <div class="feature-list-grid">
+                <!-- Group 1: Basic -->
+                <div class="f-item"><span class="f-icon">✨</span> Gabung Foto</div>
+                <div class="f-item"><span class="f-icon">📸</span> Foto Produk</div>
+                <div class="f-item"><span class="f-icon">💃</span> Foto Model AI</div>
+                <div class="f-item"><span class="f-icon">🎨</span> Edit Foto</div>
+                <div class="f-item"><span class="f-icon">📢</span> Buat Banner Iklan</div>
+
+                <!-- Group 2: Update -->
+                <div class="f-item"><span class="f-icon">🔧</span> Perbaiki Foto (HD)</div>
+                <div class="f-item"><span class="f-icon">👗</span> Foto Fashion</div>
+                <div class="f-item"><span class="f-icon">🎠</span> Konten Carousel</div>
+                <div class="f-item"><span class="f-icon">💍</span> Pre-Wedding AI</div>
+                <div class="f-item"><span class="f-icon">📷</span> Sewa Fotografer</div>
+                <div class="f-item"><span class="f-icon">🏠</span> Desain Interior</div>
+                <div class="f-item"><span class="f-icon">✏️</span> Sketsa Jadi Nyata</div>
+                <div class="f-item"><span class="f-icon">🎭</span> Art & Karikatur</div>
+                <div class="f-item"><span class="f-icon">👳</span> Foto Umrah/Haji</div>
+                <div class="f-item"><span class="f-icon">👶</span> Baby Born Foto</div>
+                <div class="f-item"><span class="f-icon">🛂</span> Pas Foto Warna</div>
+                <div class="f-item"><span class="f-icon">🤰</span> Foto Maternity</div>
+                <div class="f-item"><span class="f-icon">🌳</span> Desain Eksterior</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP (FUTURE UPDATES) -->
+    <section class="section-padding container">
+        <div class="text-center">
+            <div class="badge" style="background: #FFF7ED; color: #EA580C; border-color: #FED7AA;">COMING SOON</div>
+            <h2>Roadmap Update (Gratis!)</h2>
+            <p>Beli sekarang, Anda akan otomatis mendapatkan fitur-fitur canggih ini saat rilis nanti:</p>
+        </div>
+        <div class="feature-list-grid" style="opacity: 0.8;">
+            <div class="f-item">🚧 Mockup Kemasan</div>
+            <div class="f-item">🚧 Miniatur 3D</div>
+            <div class="f-item">🚧 Barbershop AI</div>
+            <div class="f-item">🚧 Face Swap</div>
+            <div class="f-item">🚧 Perluas Foto (Extend)</div>
+            <div class="f-item">🚧 POV Tangan</div>
+            <div class="f-item">🚧 Hapus Background</div>
+            <div class="f-item">🚧 Addons Video</div>
+        </div>
+        <p class="text-center mt-4 text-muted"><strong>Satu-satunya tool AI sekali bayar yang terus update!</strong></p>
+    </section>
+
+    <!-- SECTION 1: VIDEO CAROUSEL -->
+    <section class="section-padding bg-soft testi-section">
+        <div class="container text-center">
+            <div class="badge">REVIEW VIDEO</div>
+            <h2 class="mb-4">Apa Kata Mereka? <span class="text-accent">(Video)</span></h2>
+
+            <div class="testi-wrapper">
+                <button class="testi-nav-btn testi-prev" onclick="moveCarousel('videoTrack', -1)">❮</button>
+                <div class="testi-wrapper-window">
+                    <div class="testi-track" id="videoTrack">
+
+                        <!-- Video Items -->
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/ZW_OwC9AHIU?autoplay=1">
+                            <img src="https://img.youtube.com/vi/ZW_OwC9AHIU/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-title-overlay">Review Fitur Gabung Foto</div>
+                        </div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/wr2yVbbG_yM?autoplay=1">
+                            <img src="https://img.youtube.com/vi/wr2yVbbG_yM/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-title-overlay">Review Foto Produk</div>
+                        </div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/V8dJlvpi_Dc?autoplay=1">
+                            <img src="https://img.youtube.com/vi/V8dJlvpi_Dc/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-title-overlay">Testimoni Edit Foto</div>
+                        </div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/jJ5ShrqoJm4?autoplay=1">
+                            <img src="https://img.youtube.com/vi/jJ5ShrqoJm4/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-title-overlay">Review Fitur Fashion</div>
+                        </div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/WTVZvDJ-kuw?autoplay=1">
+                            <img src="https://img.youtube.com/vi/WTVZvDJ-kuw/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-title-overlay">Testimoni Pengguna</div>
+                        </div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/KYuxs0EDf8Q?autoplay=1">
+                            <img src="https://img.youtube.com/vi/KYuxs0EDf8Q/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-title-overlay">Review Fitur Lainnya</div>
+                        </div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/-dtgx5oa2fY?autoplay=1">
+                            <img src="https://img.youtube.com/vi/-dtgx5oa2fY/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-title-overlay">Pengalaman Pakai SatSet</div>
+                        </div>
+                        <div class="video-btn" data-src="https://www.youtube.com/embed/D5P3kdH7nCo?autoplay=1">
+                            <img src="https://img.youtube.com/vi/D5P3kdH7nCo/hqdefault.jpg" alt="Thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-title-overlay">Bonus & Fitur Baru</div>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="testi-nav-btn testi-next" onclick="moveCarousel('videoTrack', 1)">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: SOCIAL MEDIA CAROUSEL (SCREENSHOTS) -->
+    <section class="section-padding">
+        <div class="container text-center">
+            <div class="badge">BUKTI CHAT</div>
+            <h2 class="mb-4">Apa Kata Mereka di <span class="text-highlight">Social Media?</span></h2>
+
+            <div class="testi-wrapper">
+                <button class="testi-nav-btn testi-prev" onclick="moveCarousel('socialTrack', -1)">❮</button>
+                <div class="testi-wrapper-window">
+                    <div class="testi-track" id="socialTrack">
+
+                        <!-- Screenshot Items (Vertical Cards) -->
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/uploads/1762405769/njfl09e-uroBtkBGTHuRHg/1762405769134-Screenshot-2025-11-06-120639.webp"
+                                alt="Chat 1">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/uploads/1762095488/LsgEj428RWhpD6ywL0a0Sw/1762095487673-Screenshot-2025-11-02-215757.webp"
+                                alt="Chat 2">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/uploads/1762405402/POxvvd4cC0EuFMAo_RJrvw/1762405402745-Screenshot-2025-11-06-120037.webp"
+                                alt="Chat 3">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/uploads/1758884008976-Testimoni%20Sulap%20Foto%20PLR.webp"
+                                alt="Chat 4">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/business_files/27bPk9lYNYrkj6RwK5bsdwl9/1760799604837-Screenshot%202025-10-18%20at%2021.58.46.webp"
+                                alt="Chat 5">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/business_files/98lfBFMXvhNXsOoM1crXONJy/1760232282648-IMG_9748.jpeg"
+                                alt="Chat 6">
+                        </div>
+
+                    </div>
+                </div>
+                <button class="testi-nav-btn testi-next" onclick="moveCarousel('socialTrack', 1)">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL (FIXED LOGIC WITH MOBILE CLOSE BUTTON) -->
+    <div id="myModal" class="custom-modal">
+        <div class="modal-dialog">
+            <button type="button" class="close-btn" id="closeModalBtn">&times;</button>
+            <div class="modal-body">
+                <iframe id="video" src="" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+            </div>
+            <!-- Mobile specific close text button below video -->
+            <button type="button" class="close-text-btn"
+                onclick="document.getElementById('closeModalBtn').click()">Tutup Video [x]</button>
+        </div>
+    </div>
+
+    <!-- PRICING & OFFER -->
+    <section id="pricing" class="section-padding container">
+        <div class="pricing-card text-center">
+            <div class="price-badge">🔥 PROMO TERBATAS</div>
+
+            <p style="margin-top: 20px; color: var(--text-muted);">Tools lain Rp 1.500.000 / Tahun ❌</p>
+            <p style="font-weight: 700;">Di SatSet AI Studio Cuma:</p>
+
+            <div style="margin: 20px 0;">
+                <div class="old-price">Rp 300.000</div>
+                <div class="new-price">100K</div>
+                <div class="text-accent font-bold">SEKALI BAYAR (LIFETIME)</div>
+            </div>
+
+            <ul style="text-align: left; margin: 30px 0; color: var(--text-main);">
+                <li style="margin-bottom: 10px;">✅ Akses Semua 19+ Fitur Premium</li>
+                <li style="margin-bottom: 10px;">✅ <strong>Gratis Update</strong> Fitur Masa Depan</li>
+                <li style="margin-bottom: 10px;">✅ Lisensi Personal (Bebas Pakai Sendiri)</li>
+                <li style="margin-bottom: 10px;">✅ Panduan Penggunaan Lengkap</li>
+                <li style="margin-bottom: 10px;">✅ Tanpa Biaya Langganan</li>
+            </ul>
+
+            <a href="https://lynk.id/satsetaisudio/ng111w41e2rl" class="btn btn-primary btn-pulse">AMBIL PROMO SEKARANG
+                👉</a>
+
+            <p style="font-size: 0.8rem; margin-top: 15px; color: var(--text-muted);">Harga segitu awalnya cuma 5 fitur,
+                sekarang 19 fitur. Untung banget!</p>
+        </div>
+
+        <!-- BONUSES -->
+        <div class="bonus-section container" style="max-width: 600px;">
+            <h3 class="text-highlight mb-2 text-center">🎁 BONUS SPESIAL (Khusus Hari Ini)</h3>
+
+            <div style="margin-top: 20px;">
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: start;">
+                    <span style="font-size: 1.5rem;">🎧</span>
+                    <div>
+                        <strong>BONUS 1: MONEY PORTAL AUDIO</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Audio-visual experience untuk meningkatkan fokus,
+                            mindset kekayaan, dan menarik energi rezeki lebih deras.</p>
+                    </div>
+                </div>
+
+                <!-- <div style="display: flex; gap: 15px; align-items: start;">
+                    <span style="font-size: 1.5rem;">💰</span>
+                    <div>
+                        <strong>BONUS 2: AKSES OPSI PLR (Di Member Area)</strong>
+                        <p style="font-size: 0.9rem; color: #666;">Mau cuan jutaan? Nanti di member area Anda bisa upgrade lisensi PLR. Anda bisa jual ulang aplikasi ini dengan nama brand & logo Anda sendiri (Rebranding). Keuntungan 100% masuk rekening Anda.</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-padding container" style="max-width: 700px;">
+        <h2 class="text-center mb-4">Pertanyaan Umum (FAQ)</h2>
+
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Apakah Lifetime? <span class="arrow">▼</span></button>
+            <div class="faq-body">Ya, bayar sekali bisa Anda pakai selamanya, tanpa batasan, selama server kami aktif.
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Dikirim Lewat Mana? <span class="arrow">▼</span></button>
+            <div class="faq-body">Otomatis via Email setelah bayar. <strong>PENTING:</strong> Jangan sampai typo menulis
+                alamat email ya!</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Bisa Dijual Kembali? <span class="arrow">▼</span></button>
+            <div class="faq-body">Tidak ini untuk lisensi Penggunaan Personal </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-btn">🤔 Apakah Bisa Refund? <span class="arrow">▼</span></button>
+            <div class="faq-body">Tidak bisa. Karena ini produk digital (Direct Access) di mana Anda langsung dapat
+                akses dan rahasianya. Membeli berarti SETUJU.</div>
+        </div>
+        <!-- <div class="faq-item">
+            <button class="faq-btn">🤔 Bisa Request Fitur? <span class="arrow">▼</span></button>
+            <div class="faq-body">Bisa banget! Ada form request fitur di dalam member area.</div>
+        </div> -->
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h3>⚡ SatSet AI Studio</h3>
+            <p style="opacity: 0.7; margin-bottom: 20px;">Solusi Visual Cerdas untuk Kreator Indonesia.</p>
+            <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2024 SatSet AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- STICKY MOBILE CTA -->
+    <div class="sticky-bar">
+        <div style="font-weight: 800; font-size: 1.1rem; color: var(--primary);">
+            <span style="font-size: 0.8rem; color: #999; text-decoration: line-through;">300rb</span> 100K
+        </div>
+        <a href="https://lynk.id/satsetaisudio/ng111w41e2rl" class="btn btn-primary"
+            style="width: auto; padding: 10px 20px; font-size: 0.9rem;">Beli Sekarang</a>
+    </div>
+
+    <!-- AUDIO TOGGLE BUTTON -->
+    <div class="music-btn" id="musicToggle" title="Putar Soundtrack">
+        <span class="music-icon">🎵</span>
+    </div>
+
+    <!-- AUDIO ELEMENT -->
+    <audio id="bgAudio" loop>
+        <source src="https://github.com/satyaaditech/aistudiolab_filesupport/raw/refs/heads/main/ost_sat_set_AI.mp3"
+            type="audio/mpeg">
+        Browser Anda tidak mendukung audio.
+    </audio>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 1. AUDIO LOGIC
+        document.addEventListener('DOMContentLoaded', function () {
+            const audio = document.getElementById('bgAudio');
+            const btn = document.getElementById('musicToggle');
+            let isPlaying = false;
+
+            function toggleMusic() {
+                if (isPlaying) {
+                    audio.pause();
+                    btn.classList.remove('playing');
+                    isPlaying = false;
+                } else {
+                    audio.play().then(() => {
+                        btn.classList.add('playing');
+                        isPlaying = true;
+                    }).catch(err => console.log("Audio autoplay blocked", err));
+                }
+            }
+
+            // Auto-play attempt on first user interaction
+            function startAudio() {
+                audio.play().then(() => {
+                    btn.classList.add('playing');
+                    isPlaying = true;
+                    document.removeEventListener('click', startAudio);
+                }).catch(() => {
+                    // If blocked, wait for manual toggle
+                });
+            }
+
+            // Listener for manual toggle
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering global click
+                toggleMusic();
+            });
+
+            // Listener for first interaction
+            document.addEventListener('click', startAudio, { once: true });
+        });
+
+        // 2. FAQ TOGGLE
+        const faqs = document.querySelectorAll('.faq-item');
+        faqs.forEach(faq => {
+            const btn = faq.querySelector('.faq-btn');
+            const body = faq.querySelector('.faq-body');
+            btn.addEventListener('click', () => {
+                const isActive = faq.classList.contains('active');
+                faqs.forEach(other => {
+                    other.classList.remove('active');
+                    other.querySelector('.faq-body').style.maxHeight = null;
+                    other.querySelector('.arrow').style.transform = 'rotate(0deg)';
+                });
+                if (!isActive) {
+                    faq.classList.add('active');
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                    faq.querySelector('.arrow').style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // 3. IMAGE SLIDER LOGIC
+        function initComparisons() {
+            const containers = document.querySelectorAll('.comp-container');
+            function updateImageWidths() {
+                containers.forEach(container => {
+                    const beforeImg = container.querySelector('.comp-img.before');
+                    const w = container.offsetWidth;
+                    beforeImg.style.width = w + "px";
+                });
+            }
+            containers.forEach(container => {
+                const overlay = container.querySelector('.comp-overlay');
+                const slider = container.querySelector('.comp-slider');
+                let clicked = 0;
+                let w = container.offsetWidth;
+                overlay.style.width = (w / 2) + "px";
+                slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+                slider.addEventListener("mousedown", slideReady);
+                slider.addEventListener("touchstart", slideReady);
+                window.addEventListener("mouseup", slideFinish);
+                window.addEventListener("touchend", slideFinish);
+                function slideReady(e) {
+                    e.preventDefault(); clicked = 1;
+                    window.addEventListener("mousemove", slideMove);
+                    window.addEventListener("touchmove", slideMove);
+                }
+                function slideFinish() {
+                    clicked = 0;
+                    window.removeEventListener("mousemove", slideMove);
+                    window.removeEventListener("touchmove", slideMove);
+                }
+                function slideMove(e) {
+                    if (clicked == 0) return false;
+                    w = container.offsetWidth;
+                    let pos = getCursorPos(e);
+                    if (pos < 0) pos = 0;
+                    if (pos > w) pos = w;
+                    slide(pos);
+                }
+                function getCursorPos(e) {
+                    let a = container.getBoundingClientRect();
+                    let x = 0;
+                    e = (e.changedTouches) ? e.changedTouches[0] : e;
+                    x = e.pageX - a.left - window.pageXOffset;
+                    return x;
+                }
+                function slide(x) {
+                    overlay.style.width = x + "px";
+                    slider.style.left = container.offsetWidth - (container.offsetWidth - x) - (slider.offsetWidth / 2) + "px";
+                }
+            });
+            updateImageWidths();
+            window.addEventListener('resize', updateImageWidths);
+        }
+
+        // 4. UNIVERSAL CAROUSEL LOGIC (Multi Instance)
+        function moveCarousel(trackId, direction) {
+            const track = document.getElementById(trackId);
+            const isDesktop = window.innerWidth >= 768;
+
+            if (!isDesktop) {
+                // Mobile: Native smooth scroll
+                const scrollAmount = 280; // Approx card width
+                track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            } else {
+                // Desktop: Transform logic
+                const scrollAmount = 340; // Card width + gap
+                track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // 5. MODAL LOGIC
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById('myModal');
+            const iframe = document.getElementById('video');
+            const closeBtn = document.getElementById('closeModalBtn');
+
+            // Attach click event to all video triggers
+            const triggers = document.querySelectorAll('.video-btn');
+            triggers.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const videoSrc = this.getAttribute('data-src');
+                    if (videoSrc) {
+                        iframe.src = videoSrc;
+                        modal.classList.add('show');
+                    }
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove('show');
+                iframe.src = ""; // Stop video
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+
+            window.addEventListener('click', function (e) {
+                if (e.target == modal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === "Escape") {
+                    closeModal();
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            initComparisons();
+        });
+    </script>
+</body>
+
 </html>
