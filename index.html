@@ -6,7 +6,10 @@
     <title>SatSet AI Studio - Sulap Foto Seadanya Jadi Profesional</title>
     <meta name="description" content="Aplikasi AI All-in-One: Edit foto, gabung gambar, model AI, dan desain rumah. Sekali bayar, akses selamanya tanpa langganan.">
     
-    <!-- Fonts: Plus Jakarta Sans (Modern, Clean, Professional) -->
+    <!-- FIX YOUTUBE ERROR 153 -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,9 +17,9 @@
     <style>
         /* --- 1. VARIABLES & RESET --- */
         :root {
-            --primary: #0F172A; /* Hitam Kebiruan */
-            --accent: #2563EB; /* Biru SatSet */
-            --highlight: #F43F5E; /* Merah Promo */
+            --primary: #0F172A; 
+            --accent: #2563EB; 
+            --highlight: #F43F5E; 
             --bg-body: #FFFFFF;
             --bg-soft: #F8FAFC;
             --text-main: #1E293B;
@@ -94,7 +97,7 @@
 
         @media(min-width: 768px) { .hero h1 { font-size: 3.5rem; } }
 
-        /* --- 5. INTERACTIVE SLIDER (Features) --- */
+        /* --- 5. INTERACTIVE SLIDER --- */
         .showcase-grid { display: grid; gap: 40px; }
         @media(min-width: 768px) { .showcase-grid { grid-template-columns: 1fr 1fr; } }
 
@@ -179,37 +182,51 @@
         }
         @media(min-width: 768px) { .sticky-bar { display: none; } }
 
-        /* --- 10. VIDEO CAROUSEL & CUSTOM MODAL (ADAPTED FROM YOUR SAMPLE) --- */
-        .testi-wrapper { position: relative; margin-top: 40px; }
+        /* --- 10. CAROUSEL SYSTEM (VIDEO & SCREENSHOT) --- */
+        .testi-section { margin-bottom: 60px; }
+        .testi-wrapper { position: relative; overflow: hidden; }
+        
+        /* Horizontal Scroll Container */
         .testi-track {
             display: flex;
-            flex-direction: column; /* Mobile Default */
             gap: 20px;
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
         }
-        .testi-nav-btn { display: none; }
+        
+        /* Hide Scrollbar */
+        .testi-track::-webkit-scrollbar { display: none; }
+        .testi-track { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Video Thumbnail Card (Trigger) */
+        /* Video Card */
         .video-btn {
-            display: block;
-            width: 100%;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            flex-shrink: 0;
-            background: #000;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            min-width: 280px; width: 280px;
+            scroll-snap-align: center;
+            border-radius: 12px; border: 1px solid var(--border);
+            overflow: hidden; aspect-ratio: 16/9; flex-shrink: 0; background: #000;
+            position: relative; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
         .video-btn:hover { transform: scale(1.02); }
+        .video-btn img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
         
-        .video-btn img {
-            width: 100%; height: 100%; object-fit: cover; opacity: 0.9;
+        /* Screenshot Card */
+        .screenshot-item {
+            min-width: 260px; width: 260px;
+            scroll-snap-align: center;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: var(--shadow);
+        }
+        .screenshot-item img {
+            width: 100%; height: auto; display: block;
         }
         
-        /* Play Button Overlay */
         .play-overlay {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 60px; height: 60px; background: rgba(255,0,0,0.85);
@@ -225,52 +242,14 @@
             color: white; font-weight: 600; font-size: 0.9rem; text-align: left;
         }
 
-        /* MODAL STYLES (Custom Implementation of Bootstrap Modal Logic) */
-        .custom-modal {
-            display: none; /* Hidden by default */
-            position: fixed; z-index: 2000; left: 0; top: 0;
-            width: 100%; height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8); /* Backdrop */
-            align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s ease;
-        }
-        .custom-modal.show { display: flex; opacity: 1; }
-        
-        .modal-dialog {
-            position: relative; width: 90%; max-width: 800px;
-            margin: auto; background-color: #000;
-            border-radius: 8px; overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        
-        .modal-body {
-            position: relative; padding: 0; 
-            /* 16:9 Aspect Ratio Hack */
-            padding-bottom: 56.25%; height: 0;
-        }
-        
-        .modal-body iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
-        }
-        
-        .close-btn {
-            position: absolute; top: -40px; right: 0;
-            color: white; font-size: 30px; font-weight: bold;
-            background: none; border: none; cursor: pointer; z-index: 2001;
-        }
+        /* Desktop Specifics */
+        .testi-nav-btn { display: none; }
         @media(min-width: 768px) {
-            .close-btn { right: -40px; }
-        }
-
-        /* Desktop Carousel */
-        @media(min-width: 768px) {
-            .testi-wrapper-window { overflow: hidden; margin: 0 50px; }
-            .testi-track {
-                flex-direction: row; gap: 20px; width: max-content;
-                transition: transform 0.5s ease-in-out; align-items: flex-start;
-            }
-            .video-btn { width: 320px; height: 180px; } /* Fixed Size Desktop */
+            .testi-wrapper { overflow: hidden; } /* Hide scrollbar area */
+            .testi-track { overflow-x: hidden; }
+            .video-btn { min-width: 320px; width: 320px; }
+            .screenshot-item { min-width: 300px; width: 300px; }
+            
             .testi-nav-btn {
                 display: flex; position: absolute; top: 50%; transform: translateY(-50%);
                 width: 40px; height: 40px; background: white; border: 1px solid var(--border);
@@ -281,6 +260,28 @@
             .testi-nav-btn:hover { background: var(--bg-soft); color: var(--accent); }
             .testi-prev { left: 0; } .testi-next { right: 0; }
         }
+
+        /* MODAL STYLES */
+        .custom-modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto;
+            background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .custom-modal.show { display: flex; opacity: 1; }
+        .modal-dialog {
+            position: relative; width: 90%; max-width: 800px; margin: auto;
+            background-color: #000; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .modal-body { position: relative; padding: 0; padding-bottom: 56.25%; height: 0; }
+        .modal-body iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .close-btn {
+            position: absolute; top: -40px; right: 0; color: white;
+            font-size: 30px; font-weight: bold; background: none; border: none;
+            cursor: pointer; z-index: 2001;
+        }
+        @media(min-width: 768px) { .close-btn { right: -40px; } }
 
         .drag-msg { display: block; text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 10px; }
         @media(min-width: 768px) { .drag-msg { display: none; } }
@@ -308,7 +309,8 @@
         </div>
 
         <div class="hero-mockup">
-            <img src="https://cdn.scalev.id/uploads/1763186946/P9Rb0XWu5tWseYJWu6vJKQ/1763186946249-Sulap-Foto-Pro-Mockup.webp" alt="Dashboard SatSet AI">
+            <!-- UPDATED HERO IMAGE -->
+            <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/produk_ailab.png" alt="Dashboard SatSet AI">
         </div>
     </header>
 
@@ -347,9 +349,9 @@
             <!-- 1. GABUNG FOTO -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://cdn.scalev.id/uploads/1763041078/5TPn8c22UQA45Dt6FqKHnQ/1763041074794-Screenshot-2025-11-13-at-20.37.34.webp" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/1_Fitur%20Gabungkan%20Gambar%20(after).jpg" class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://cdn.scalev.id/uploads/1763041078/5TPn8c22UQA45Dt6FqKHnQ/1763041074794-Screenshot-2025-11-13-at-20.37.34.webp" class="comp-img before" style="filter: grayscale(100%);" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/1_Fitur%20Gabungkan%20Gambar%20(before).jpg" class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
                     <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
@@ -362,9 +364,9 @@
             <!-- 2. FOTO PRODUK -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://cdn.scalev.id/uploads/1763040391/ofhAvknpF44Huuf_IoFk4g/1763040391331-Screenshot-2025-11-13-at-20.24.07.webp" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/3_Foto_produk(after).jpg" class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://cdn.scalev.id/uploads/1763040391/ofhAvknpF44Huuf_IoFk4g/1763040391331-Screenshot-2025-11-13-at-20.24.07.webp" class="comp-img before" style="filter: grayscale(100%);" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/3_Foto_produk(before).jpg" class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
                     <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
@@ -377,9 +379,9 @@
             <!-- 3. FASHION -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://cdn.scalev.id/uploads/1763051025/Astf2BS5u4uOqssAG2bWtw/1763051025624-Screenshot-2025-11-13-at-23.23.07.webp" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/4_Fitur_foto_Fashion(After).jpg" class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://cdn.scalev.id/uploads/1763051025/Astf2BS5u4uOqssAG2bWtw/1763051025624-Screenshot-2025-11-13-at-23.23.07.webp" class="comp-img before" style="filter: grayscale(100%);" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/4_Fitur_foto_Fashion(Before).jpg" class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
                     <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
@@ -392,9 +394,9 @@
             <!-- 4. EDIT FOTO -->
             <div class="feature-card">
                 <div class="comp-container">
-                    <img src="https://cdn.scalev.id/uploads/1763040519/H-u0BFmk78B_nnPpXtjrGg/1763040519476-Screenshot-2025-11-13-at-20.28.22.webp" class="comp-img after" alt="After">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/2_Fitur_edit_Foto(After).jpg" class="comp-img after" alt="After">
                     <div class="comp-overlay">
-                        <img src="https://cdn.scalev.id/uploads/1763040519/H-u0BFmk78B_nnPpXtjrGg/1763040519476-Screenshot-2025-11-13-at-20.28.22.webp" class="comp-img before" style="filter: grayscale(100%);" alt="Before">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/2_Fitur_edit_Foto(Before).jpg" class="comp-img before" alt="Before">
                     </div>
                     <div class="comp-slider">↔</div>
                     <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
@@ -403,6 +405,82 @@
                 <h3>4. Edit Objek Instan</h3>
                 <p>Ganti background, tambah objek, hapus orang lewat, semua cuma pakai perintah teks.</p>
             </div>
+            
+            <!-- 5. BANNER IKLAN (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/5_Fitur_Buat_Banner(after).jpg" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/5_Fitur_Buat_Banner(before).jpg" class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>5. Buat Banner Iklan</h3>
+                <p>Ubah foto produk biasa menjadi materi iklan profesional dalam hitungan detik.</p>
+            </div>
+
+            <!-- 6. PREWEDDING AI (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7_Fitur_Buat_Prewedding(after).jpg" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/7_Fitur_Buat_Prewedding(before).jpg" class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>6. Foto Prewedding AI</h3>
+                <p>Wujudkan foto impian dengan pasangan tanpa perlu sewa studio atau lokasi mahal.</p>
+            </div>
+
+            <!-- 7. FOTOGRAFER (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_Fotographerl(after)_1.jpg" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_Fotographerl(before)_1.jpg" class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>7. Sewa Fotografer Virtual</h3>
+                <p>Simulasi foto studio untuk kebutuhan personal, keluarga, hingga foto profil profesional.</p>
+            </div>
+
+            <!-- 8. SKETSA GAMBAR (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_SketsaGambar(after).jpg" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/9_Fitur_SketsaGambar(before).jpg" class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>8. Sketsa Jadi Nyata</h3>
+                <p>Ubah coretan tangan kasar menjadi gambar rendering 3D yang realistis dan menakjubkan.</p>
+            </div>
+
+            <!-- 9. ART & KARIKATUR (NEW) -->
+            <div class="feature-card">
+                <div class="comp-container">
+                    <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/10_Fitur_ArtKarikatur(after).jpg" class="comp-img after" alt="After">
+                    <div class="comp-overlay">
+                        <img src="https://raw.githubusercontent.com/satyaaditech/aistudiolab_filesupport/refs/heads/main/Asset_BA4WEB/10_Fitur_ArtKarikatur(before).jpg" class="comp-img before" alt="Before">
+                    </div>
+                    <div class="comp-slider">↔</div>
+                    <div class="label lb-before">BEFORE</div><div class="label lb-after">AFTER</div>
+                </div>
+                <span class="drag-msg">👆 Geser Gambar</span>
+                <h3>9. Art & Karikatur</h3>
+                <p>Kreasikan foto wajah menjadi karikatur lucu atau gaya seni artistik lainnya.</p>
+            </div>
+
         </div>
     </section>
 
@@ -456,60 +534,53 @@
         <p class="text-center mt-4 text-muted"><strong>Satu-satunya tool AI sekali bayar yang terus update!</strong></p>
     </section>
 
-    <!-- TESTIMONIALS VIDEO CAROUSEL (FIXED WITH SUCCESSFUL MODAL LOGIC) -->
-    <section class="section-padding bg-soft">
+    <!-- SECTION 1: VIDEO CAROUSEL -->
+    <section class="section-padding bg-soft testi-section">
         <div class="container text-center">
-            <h2 class="mb-4">Kata Mereka <span class="text-accent">(Tanpa Diminta)</span></h2>
-            <p class="mb-4 text-muted">Sebegitu bagusnya tool ini, mereka kasih testimoni sukarela!</p>
+            <div class="badge">REVIEW VIDEO</div>
+            <h2 class="mb-4">Apa Kata Mereka? <span class="text-accent">(Video)</span></h2>
             
             <div class="testi-wrapper">
-                <button class="testi-nav-btn testi-prev" onclick="moveCarousel(-1)">❮</button>
+                <button class="testi-nav-btn testi-prev" onclick="moveCarousel('videoTrack', -1)">❮</button>
                 <div class="testi-wrapper-window">
-                    <div class="testi-track" id="testiTrack">
+                    <div class="testi-track" id="videoTrack">
                         
-                        <!-- Video Thumbnails Triggering Modal -->
+                        <!-- Video Items -->
                         <div class="video-btn" data-src="https://www.youtube.com/embed/ZW_OwC9AHIU?autoplay=1">
                             <img src="https://img.youtube.com/vi/ZW_OwC9AHIU/hqdefault.jpg" alt="Thumbnail">
                             <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Review Fitur Gabung Foto</div>
                         </div>
-
                         <div class="video-btn" data-src="https://www.youtube.com/embed/wr2yVbbG_yM?autoplay=1">
                             <img src="https://img.youtube.com/vi/wr2yVbbG_yM/hqdefault.jpg" alt="Thumbnail">
                             <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Review Foto Produk</div>
                         </div>
-
                         <div class="video-btn" data-src="https://www.youtube.com/embed/V8dJlvpi_Dc?autoplay=1">
                             <img src="https://img.youtube.com/vi/V8dJlvpi_Dc/hqdefault.jpg" alt="Thumbnail">
                             <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Testimoni Edit Foto</div>
                         </div>
-
                         <div class="video-btn" data-src="https://www.youtube.com/embed/jJ5ShrqoJm4?autoplay=1">
                             <img src="https://img.youtube.com/vi/jJ5ShrqoJm4/hqdefault.jpg" alt="Thumbnail">
                             <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Review Fitur Fashion</div>
                         </div>
-
                          <div class="video-btn" data-src="https://www.youtube.com/embed/WTVZvDJ-kuw?autoplay=1">
                             <img src="https://img.youtube.com/vi/WTVZvDJ-kuw/hqdefault.jpg" alt="Thumbnail">
                             <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Testimoni Pengguna</div>
                         </div>
-
                          <div class="video-btn" data-src="https://www.youtube.com/embed/KYuxs0EDf8Q?autoplay=1">
                             <img src="https://img.youtube.com/vi/KYuxs0EDf8Q/hqdefault.jpg" alt="Thumbnail">
                             <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Review Fitur Lainnya</div>
                         </div>
-
                          <div class="video-btn" data-src="https://www.youtube.com/embed/-dtgx5oa2fY?autoplay=1">
                             <img src="https://img.youtube.com/vi/-dtgx5oa2fY/hqdefault.jpg" alt="Thumbnail">
                             <div class="play-overlay"><div class="play-icon"></div></div>
                             <div class="video-title-overlay">Pengalaman Pakai SatSet</div>
                         </div>
-
                          <div class="video-btn" data-src="https://www.youtube.com/embed/D5P3kdH7nCo?autoplay=1">
                             <img src="https://img.youtube.com/vi/D5P3kdH7nCo/hqdefault.jpg" alt="Thumbnail">
                             <div class="play-overlay"><div class="play-icon"></div></div>
@@ -518,17 +589,54 @@
 
                     </div>
                 </div>
-                <button class="testi-nav-btn testi-next" onclick="moveCarousel(1)">❯</button>
+                <button class="testi-nav-btn testi-next" onclick="moveCarousel('videoTrack', 1)">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: SOCIAL MEDIA CAROUSEL (SCREENSHOTS) -->
+    <section class="section-padding">
+        <div class="container text-center">
+            <div class="badge">BUKTI CHAT</div>
+            <h2 class="mb-4">Apa Kata Mereka di <span class="text-highlight">Social Media?</span></h2>
+            
+            <div class="testi-wrapper">
+                <button class="testi-nav-btn testi-prev" onclick="moveCarousel('socialTrack', -1)">❮</button>
+                <div class="testi-wrapper-window">
+                    <div class="testi-track" id="socialTrack">
+                        
+                        <!-- Screenshot Items (Vertical Cards) -->
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/uploads/1762405769/njfl09e-uroBtkBGTHuRHg/1762405769134-Screenshot-2025-11-06-120639.webp" alt="Chat 1">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/uploads/1762095488/LsgEj428RWhpD6ywL0a0Sw/1762095487673-Screenshot-2025-11-02-215757.webp" alt="Chat 2">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/uploads/1762405402/POxvvd4cC0EuFMAo_RJrvw/1762405402745-Screenshot-2025-11-06-120037.webp" alt="Chat 3">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/uploads/1758884008976-Testimoni%20Sulap%20Foto%20PLR.webp" alt="Chat 4">
+                        </div>
+                         <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/business_files/27bPk9lYNYrkj6RwK5bsdwl9/1760799604837-Screenshot%202025-10-18%20at%2021.58.46.webp" alt="Chat 5">
+                        </div>
+                         <div class="screenshot-item">
+                            <img src="https://cdn.scalev.id/business_files/98lfBFMXvhNXsOoM1crXONJy/1760232282648-IMG_9748.jpeg" alt="Chat 6">
+                        </div>
+
+                    </div>
+                </div>
+                <button class="testi-nav-btn testi-next" onclick="moveCarousel('socialTrack', 1)">❯</button>
             </div>
         </div>
     </section>
     
-    <!-- MODAL (Based on your working reference) -->
+    <!-- MODAL (FIXED LOGIC) -->
     <div id="myModal" class="custom-modal">
         <div class="modal-dialog">
             <button type="button" class="close-btn" id="closeModalBtn">&times;</button>
             <div class="modal-body">
-                <!-- Attributes matched exactly to your sample -->
                 <iframe id="video" src="" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
             </div>
         </div>
@@ -637,13 +745,11 @@
             const body = faq.querySelector('.faq-body');
             btn.addEventListener('click', () => {
                 const isActive = faq.classList.contains('active');
-                // Close all
                 faqs.forEach(other => {
                     other.classList.remove('active');
                     other.querySelector('.faq-body').style.maxHeight = null;
                     other.querySelector('.arrow').style.transform = 'rotate(0deg)';
                 });
-                // Open clicked
                 if (!isActive) {
                     faq.classList.add('active');
                     body.style.maxHeight = body.scrollHeight + 'px';
@@ -707,31 +813,27 @@
             window.addEventListener('resize', updateImageWidths);
         }
         
-        // 3. TESTIMONIAL CAROUSEL LOGIC
-        let currentTestiIndex = 0;
-        function moveCarousel(direction) {
-            const track = document.getElementById('testiTrack');
-            const items = document.querySelectorAll('.video-btn');
-            const totalItems = items.length;
-            const visibleItems = 3; 
-            const gap = 20; 
+        // 3. UNIVERSAL CAROUSEL LOGIC (Multi Instance)
+        function moveCarousel(trackId, direction) {
+            const track = document.getElementById(trackId);
+            const isDesktop = window.innerWidth >= 768;
             
-            if (totalItems === 0) return; 
-
-            const stepWidth = items[0].offsetWidth + gap;
-            const maxIndex = totalItems - visibleItems;
-
-            currentTestiIndex += direction;
-
-            if (currentTestiIndex < 0) currentTestiIndex = 0;
-            if (maxIndex > 0 && currentTestiIndex > maxIndex) currentTestiIndex = maxIndex;
-            else if (maxIndex <= 0) currentTestiIndex = 0;
-
-            const translateX = -(currentTestiIndex * stepWidth);
-            track.style.transform = `translateX(${translateX}px)`;
+            if (!isDesktop) {
+                // Mobile: Native smooth scroll
+                const scrollAmount = 280; // Approx card width
+                track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            } else {
+                // Desktop: Transform logic
+                // Note: This simple logic requires tracking index per carousel.
+                // For simplicity in this monolithic file without complex state management:
+                // We will fallback to scrollLeft for desktop too if specific index tracking is complex.
+                // But let's implement a simple scrollLeft based approach which is robust.
+                const scrollAmount = 340; // Card width + gap
+                track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            }
         }
 
-        // 4. MODAL LOGIC (ADAPTED FROM YOUR REFERENCE)
+        // 4. MODAL LOGIC
         document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('myModal');
             const iframe = document.getElementById('video');
@@ -749,18 +851,21 @@
                 });
             });
 
-            // Close Modal Function
             function closeModal() {
                 modal.classList.remove('show');
                 iframe.src = ""; // Stop video
             }
 
-            // Close triggers
             closeBtn.addEventListener('click', closeModal);
             
-            // Click outside modal to close
             window.addEventListener('click', function(e) {
                 if (e.target == modal) {
+                    closeModal();
+                }
+            });
+
+             document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
                     closeModal();
                 }
             });
